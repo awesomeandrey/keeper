@@ -1,0 +1,30 @@
+/* SLDS overrides */
+
+.slds-global-header {
+    background-color: #f3f2f2;
+}
+
+.slds-global-header_container {
+    position: relative;
+}
+
+.slds-nav-vertical__action {
+    padding-left: .8rem;
+}
+
+.slds-border__none {
+    border: none !important;
+}
+
+.slds-tabs_default__content, .slds-tabs--default__content {
+    padding: 0;
+}
+
+.slds-notify-container, .slds-notify_container {
+    width: 50%;
+    transform: translate(50%);
+}
+
+.slds-dropdown_length-5, .slds-dropdown--length-5 {
+    max-height: 8.5rem;
+}

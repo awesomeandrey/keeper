@@ -1,0 +1,43 @@
+/* Scrollbar */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Container styles */
+
+.height-fill {
+    height: 100%;
+}
+
+.width-fill {
+    width: 100%;
+}
+
+/* Custom Card styles */
+
+.custom-card {
+}
+
+.custom-card__header {
+    min-height: 8%;
+    max-height: 15%;
+}
+
+.custom-card__content {
+    border-top: 1px solid rgb(221, 219, 218);
+    min-height: 80%;
+    max-height: 85%;
+}
