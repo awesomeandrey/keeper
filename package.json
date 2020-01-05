@@ -1,0 +1,62 @@
+{
+  "name": "keeper",
+  "description": "Desktop application for storing user-defined credentials in a secure way.",
+  "author": "Andrii Melnichuk <awispack@gmail.com>",
+  "homepage": "./",
+  "version": "1.0.0",
+  "private": true,
+  "main": "electron/main.js",
+  "build": {
+    "appId": "edu.keeper",
+    "productName": "Keeper",
+    "copyright": "Copyright © 2020 ${author}",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "icon": "build/logo.ico"
+    },
+    "linux": {
+      "target": "deb",
+      "category": "Education",
+      "icon": "build/logo.icns"
+    }
+  },
+  "scripts": {
+    "start": "yarn run copy-slds-assets && BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "jest",
+    "copy-slds-assets": "rsync node_modules/@salesforce-ux/design-system/assets public -r",
+    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "preelectron-pack": "yarn run copy-slds-assets && yarn build && rsync electron build -r && rsync src build -r --exclude components --exclude *.test.js",
+    "electron-pack": "yarn electron-builder \"-c.extraMetadata.main=build/electron/main.js\""
+  },
+  "dependencies": {
+    "@salesforce-ux/design-system": "^2.10.2",
+    "@salesforce/design-system-react": "^0.10.17",
+    "bcrypt": "^3.0.8",
+    "cryptr": "^6.0.1",
+    "electron-is-dev": "^1.1.0",
+    "generate-password": "^1.5.0",
+    "js-base64": "^2.5.1",
+    "lowdb": "^1.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.0",
+    "shortid": "2.2.15",
+    "use-global-hook": "^0.1.12"
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.2",
+    "electron": "^7.1.7",
+    "electron-builder": "^21.2.0",
+    "electron-rebuild": "^1.10.1",
+    "jest": "24.9.0",
+    "wait-on": "^3.3.0"
+  },
+  "browserslist": [
+    "defaults"
+  ]
+}
