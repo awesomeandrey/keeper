@@ -7,7 +7,7 @@ const OutputCheckbox = props => {
         <Checkbox
             labels={{label}}
             variant="toggle"
-            checked={value}
+            checked={Boolean(value)}
             readOnly={true}
         />
     );

@@ -41,7 +41,6 @@ const CredentialMoveForm = props => {
             label={Label.Form_Credential_Move}
             loading={loading}
             icon={<Icon category="utility" name="open_folder" size="small"/>}
-            hasCustomFields={false}
             fields={inputFields}
             onSave={handleMove}
             onCancel={onCancel}

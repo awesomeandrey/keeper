@@ -40,6 +40,7 @@ export default {
     Btn_Cancel: {[EN]: "Cancel", [UK]: "Відміна"},
     Btn_Delete: {[EN]: "Delete", [UK]: "Видалити"},
     Btn_Move: {[EN]: "Move", [UK]: "Перемістити"},
+    Btn_Back: {[EN]: "Back", [UK]: "Назад"},
     Btn_DeleteAccount: {[EN]: "Delete Account", [UK]: "Видалити Акаунт"},
 
     // Form general labels;
@@ -91,13 +92,31 @@ export default {
         [UK]: "Ви впевнені, що бажаєте імпортувати дані?"
     },
     Form_User_ImportDataError: {[EN]: "Couldn't import data!", [UK]: "Неможливо імпортувати дані!"},
+    Form_User_TelegramBot_SetupTitle: {[EN]: "Telegram Bot 2FA", [UK]: "Telegram Bot 2FA"},
+    Form_User_TelegramBot_SetupGuide: {
+        [EN]: "Get accessToken from Telegram [@BotFather](https://telegram.me/BotFather).",
+        [UK]: "Інструкція для налаштування Telegram Bot - [@BotFather](https://telegram.me/BotFather)."
+    },
+    Form_User_TelegramBot_ValidateConnection: {[EN]: "Validate connection", [UK]: "Перевірити з'єднання"},
+    Form_User_TelegramBot_SetupSuccess: {
+        [EN]: "Telegram Bot connection was successfully established!",
+        [UK]: "Telegram Bot успішно приєднано."
+    },
+    Form_User_TelegramBot_SetupError: {
+        [EN]: "Couldn't establish connection with Telegram Bot.",
+        [UK]: "Неможливо приєднати Telegram Bot."
+    },
+    Form_User_TelegramBot_TokenIsRequired: {
+        [EN]: "Telegram Bot API token is mandatory.",
+        [UK]: "Необхідно надати Telegram Bot API токен."
+    },
 
     // Setup tabs;
     Tab_Setup: {[EN]: "Setup Account", [UK]: "Налаштування акаунту"},
     Tab_EncryptionKey: {[EN]: "Encryption Key", [UK]: "Секретний Ключ"},
     Tab_ManageData: {[EN]: "Manage Data", [UK]: "Управління даними"},
     Tab_About: {[EN]: "About", [UK]: "Про додаток"},
-    Tab_2FA: {[EN]: "Two-factor authentication", [UK]: "Дво-факторна аутентифікація"},
+    Tab_Telegram2FA: {[EN]: "Telegram 2FA", [UK]: "Telegram 2FA"},
 
     // User fields;
     Field_User_Name: {[EN]: "Name", [UK]: "Ім'я Користувача"},
@@ -132,6 +151,9 @@ export default {
         [UK]: "Новий Секретний Ключ має відповідати тим же вимогам, що і попердній, але при цьому він має відрізнятися."
     },
     Field_User_LastModifiedDate: {[EN]: "Last Modified Date", [UK]: "Остання дата оновлення"},
+    Field_User_EnableTelegram2FA: {[EN]: "Enable Telegram 2FA", [UK]: "Увімкнути Telegram 2FA"},
+    Field_User_TelegramBotToken: {[EN]: "Telegram Bot Token", [UK]: "Telegram Bot Token"},
+    Field_User_TelegramBotChatId: {[EN]: "Telegram Bot Chat ID", [UK]: "Telegram Bot Chat ID"},
 
     // Key confirmation panel;
     EncryptionKey_ToConfirm: {
@@ -145,6 +167,24 @@ export default {
     EncryptionKey_CannotBeSame: {
         [EN]: "New Encryption key cannot be the same!",
         [UK]: "Не можна повторно використати попередній ключ."
+    },
+
+    // Telegram 2FA confirmation panel;
+    Telegram2FA_ConfirmActionTitle: {[EN]: "Login Confirmation", [UK]: "Підтвердження входу"},
+    Telegram2FA_ConfirmActionDescription: {
+        [EN]: "Please, confirm login through respective Telegram Bot.",
+        [UK]: "Будь-ласка, підтвердіть вхід через бот в Telegram."
+    },
+    Telegram2FA_ReSend: {[EN]: "Re-send", [UK]: "Відправити заново"},
+    Telegram2FA_ConfirmLogin: {[EN]: "Confirm login", [UK]: "Підтвердити вхід"},
+    Telegram2FA_MessageSent: {
+        [EN]: "Please, confirm login attempt in Telegram Bot.",
+        [UK]: "Будь-ласка, підтвердіть вхід через Telegram Bot."
+    },
+    Telegram2FA_SuccessfulLogin: {[EN]: "Successful login", [UK]: "Вхід успішно виконано"},
+    Telegram2FA_BotIsIdle: {
+        [EN]: "Seems that you Telegram Bot is idle. Try writing some message to it, and re-try.",
+        [UK]: "Схоже що Ваш Telegram Bot неактивний. Спробуйте відправити йому повідомлення Й виконайте вхід знову."
     },
 
     // Credential form;

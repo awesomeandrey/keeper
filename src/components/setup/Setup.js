@@ -3,6 +3,7 @@ import Tabs from "@salesforce/design-system-react/module/components/tabs";
 import TabsPanel from "@salesforce/design-system-react/module/components/tabs/panel";
 import Header from "../commons/header/Header";
 import UserForm from "./basic/UserForm";
+import Telegram2FA from "./2fa/Telegram2FA";
 import ChangeEncryptionKeyPanel from "./change-enc-key/ChangeEncryptionKeyPanel";
 import DataManagementPanel from "./data-management/DataManagementPanel";
 import About from "./about/About";
@@ -50,7 +51,7 @@ const Setup = () => {
 
     return (
         <div className="keeper-pane__setup height-fill">
-            <Header userInfo={userInfo}/>
+            <Header user={userInfo}/>
             <div className="slds-align--absolute-center slds-m-top--medium">
                 <div style={{minWidth: "40rem"}}>
                     <Tabs variant="default" className="slds-box slds-box--small slds-p-bottom--none">
@@ -64,19 +65,20 @@ const Setup = () => {
                         </TabsPanel>
                         {
                             !!userInfo &&
+                            <TabsPanel label={Label.Tab_Telegram2FA} disabled={!userInfo}>
+                                <Telegram2FA user={userInfo} onSave={handleUpdate}/>
+                            </TabsPanel>
+                        }
+                        {
+                            !!userInfo &&
                             <TabsPanel label={Label.Tab_EncryptionKey}>
-                                <ChangeEncryptionKeyPanel
-                                    user={userInfo}
-                                    onSave={handleUpdate}
-                                />
+                                <ChangeEncryptionKeyPanel user={userInfo} onSave={handleUpdate}/>
                             </TabsPanel>
                         }
                         {
                             !!userInfo &&
                             <TabsPanel label={Label.Tab_ManageData} disabled={!userInfo}>
-                                <DataManagementPanel
-                                    user={userInfo}
-                                />
+                                <DataManagementPanel user={userInfo}/>
                             </TabsPanel>
                         }
                         <TabsPanel label={Label.Tab_About}>

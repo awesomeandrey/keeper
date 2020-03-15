@@ -28,9 +28,6 @@ const InputField = props => {
     } else if (type === FieldTypes.PICKLIST) {
         return <PicklistInputField {...props}/>;
     } else if (type === FieldTypes.CUSTOM) {
-        if (fieldDef.deleted) {
-            return <span/>;
-        }
         return <CustomInputField {...props}/>;
     }
     return <p>Unsupported field type.</p>

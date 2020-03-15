@@ -4,6 +4,8 @@ import IconSettings from "@salesforce/design-system-react/module/components/icon
 import BrandBand from "@salesforce/design-system-react/module/components/brand-band";
 import Welcome from "./components/home/Welcome";
 import Setup from "./components/setup/Setup";
+import KeyConfirmationPanel from "./components/auth/KeyConfirmationPanel";
+import Telegram2FAConfirmationPanel from "./components/auth/Telegram2FAConfirmationPanel";
 import Vault from "./components/vault/Vault";
 import ModalsContainer from "./components/commons/modals/ModalsContainer";
 import ToastsContainer from "./components/commons/toasts/ToastsContainer";
@@ -36,6 +38,9 @@ const AppContainer = () => {
                     <HashRouter>
                         <Route path={Links.DEFAULT} exact component={Welcome}/>
                         <Route path={Links.SETUP} exact component={Setup}/>
+                        <Route path={Links.KEY_CONFIRMATION} exact component={KeyConfirmationPanel}/>
+                        <Route path={Links.TELEGRAM_TWO_FACTOR_CONFIRMATION} exact
+                               component={Telegram2FAConfirmationPanel}/>
                         <Route path={Links.VAULT} exact component={Vault}/>
                     </HashRouter>
                 </div>

@@ -4,7 +4,7 @@ import DataTableColumn from "@salesforce/design-system-react/module/components/d
 import Popover from "@salesforce/design-system-react/module/components/popover/popover";
 import {Button} from "@salesforce/design-system-react";
 
-import {Label} from "../../modules/translation/LabelService";
+import {Label} from "../../../modules/translation/LabelService";
 
 const DeleteAccounts = props => {
     const {proxiedUsers, onCancel, onDelete} = props;

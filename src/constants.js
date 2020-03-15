@@ -41,6 +41,7 @@ module.exports = {
          * Folder events;
          */
         SELECT_FOLDER: "selectFolder",
+        CREATE_FOLDER: "createFolder",
         EDIT_FOLDER: "editFolder",
         DELETE_FOLDER: "deleteFolder",
         /**
@@ -61,7 +62,9 @@ module.exports = {
     Links: {
         DEFAULT: "/",
         SETUP: "/setup",
-        VAULT: "/vault"
+        VAULT: "/vault",
+        KEY_CONFIRMATION: "/key_confirmation",
+        TELEGRAM_TWO_FACTOR_CONFIRMATION: "/telegram_2fa_confirmation"
     },
     FormMode: {
         CREATE_MODE: "create",

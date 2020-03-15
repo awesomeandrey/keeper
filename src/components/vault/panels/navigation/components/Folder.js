@@ -11,16 +11,16 @@ import {ApplicationEvents} from "../../../../../constants";
 import {Label} from "../../../../../modules/translation/LabelService";
 
 const Folder = props => {
-    const [isOpened, setOpened] = useState(false);
+    const {proxiedFolder, credentials = [], folders: innerFolders = []} = props;
 
-    const {folder} = props, {id, name: folderName, folders, credentials} = folder;
+    const [isOpened, setOpened] = useState(false);
 
     const handleClick = event => {
         event.stopPropagation();
         setOpened(!isOpened);
         CustomEvents.fire({
             eventName: ApplicationEvents.SELECT_FOLDER,
-            detail: {id, folderName}
+            detail: proxiedFolder.record
         });
     };
 
@@ -29,8 +29,8 @@ const Folder = props => {
             opened={isOpened}
             navItem={
                 <NavigationItem
-                    id={id}
-                    label={folderName}
+                    id={proxiedFolder.recordId}
+                    label={proxiedFolder.name}
                     labelClassName="slds-text-title_caps"
                     iconName={isOpened ? "opened_folder" : "open_folder"}
                     onClick={handleClick}
@@ -44,19 +44,23 @@ const Folder = props => {
                         onClick={e => e.stopPropagation()}
                         onSelect={({value}) => {
                             if (value === "edit") {
-                                CustomEvents.fire({eventName: ApplicationEvents.EDIT_FOLDER, detail: folder});
+                                CustomEvents.fire({
+                                    eventName: ApplicationEvents.EDIT_FOLDER,
+                                    detail: proxiedFolder.record
+                                });
                             } else if (value === "delete") {
-                                CustomEvents.fire({eventName: ApplicationEvents.DELETE_FOLDER, detail: folder});
+                                CustomEvents.fire({
+                                    eventName: ApplicationEvents.DELETE_FOLDER,
+                                    detail: proxiedFolder.record
+                                });
                             }
                         }}
                         options={[
                             {
-                                label: Label.Btn_Edit,
-                                value: "edit",
+                                label: Label.Btn_Edit, value: "edit",
                                 leftIcon: {name: "edit", category: "utility"}
                             }, {
-                                label: Label.Btn_Delete,
-                                value: "delete",
+                                label: Label.Btn_Delete, value: "delete",
                                 leftIcon: {name: "delete", category: "utility"}
                             }
                         ]}
@@ -64,8 +68,8 @@ const Folder = props => {
                 </NavigationItem>
             }
         >
-            <Folders folders={folders || []}/>
-            <Credentials credentials={credentials || []}/>
+            <Folders folders={innerFolders}/>
+            <Credentials credentials={credentials}/>
         </NavigationSection>
     );
 };

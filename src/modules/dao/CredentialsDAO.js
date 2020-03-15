@@ -83,18 +83,12 @@ class CredentialsDAO extends GenericDAO {
         return super.selectByField({tableName: FOLDERS, key: FolderFieldNames.PARENT_ID, value: folderId});
     }
 
+    persistCredential(credential) {
+        return super.persist({tableName: CREDENTIALS, record: credential});
+    }
+
     saveCredential(credential) {
-        const recordId = credential[CommonFieldNames.ID], foundCredential = this.selectCredentialById(recordId);
-        if (foundCredential) {
-            // Re-write completely (due to 'custom fields' feature);
-            let isDeleted = this.deleteCredential(foundCredential);
-            if (!isDeleted) {
-                throw new Error("Internal error occurred.");
-            }
-            return super.persist({tableName: CREDENTIALS, record: credential})
-        } else {
-            return super.save({tableName: CREDENTIALS, record: credential});
-        }
+        return super.save({tableName: CREDENTIALS, record: credential});
     }
 
     saveFolder(folder) {
@@ -132,7 +126,6 @@ class CredentialsDAO extends GenericDAO {
             }
         });
     }
-
 }
 
 module.exports = CredentialsDAO;

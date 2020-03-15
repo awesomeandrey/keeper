@@ -15,22 +15,21 @@ import {Label} from "../../../modules/translation/LabelService";
 import {Icon} from "@salesforce/design-system-react";
 
 const Header = props => {
-    const {userInfo} = props;
+    const {user} = props;
 
     const history = useHistory(),
         navService = NavigationService(history),
-        proxiedUser = new UserProxy(userInfo);
+        proxiedUser = new UserProxy(user);
 
     let navigationOptions = [
         {label: Label.LinkVault, value: Links.VAULT},
         {label: Label.LinkSetup, value: Links.SETUP},
         {label: Label.LinkLogout, value: Links.DEFAULT}
     ];
-    if (!userInfo) {
+    if (!user) {
         navigationOptions = navigationOptions
             .filter(({value}) => value !== Links.VAULT);
     }
-
     const lastActivityDateFieldDef = proxiedUser.castToFieldsForPeekView()[0];
     return (
         <GlobalHeader logoSrc="logo.ico">
@@ -44,15 +43,16 @@ const Header = props => {
                 }
             />
             {
-                userInfo
-                && <GlobalHeaderProfile
+                user && <GlobalHeaderProfile
                     avatar={<Icon category="action" name="new_person_account" size="x-small"/>}
                     popover={
                         <Popover
                             heading={proxiedUser.name}
                             body={<OutputField {...lastActivityDateFieldDef}/>}
                             align="bottom right"
-                        />
+                        >
+                            <span/>
+                        </Popover>
                     }
                 />
             }

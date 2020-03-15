@@ -1,13 +1,13 @@
 import React from "react";
 import Credential from "./Credential";
 
-import RecordProxy from "../../../../../modules/dao/proxies/common/RecordProxy";
+import CredentialProxy from "../../../../../modules/dao/proxies/credential/CredentialProxy";
 
 const Credentials = props => {
     const {credentials = []} = props;
     return credentials.map(_ => {
-        let proxiedRecord = new RecordProxy(_);
-        return <Credential key={proxiedRecord.recordId} credential={proxiedRecord.record}/>
+        let proxiedRecord = new CredentialProxy(_);
+        return <Credential key={proxiedRecord.recordId} proxiedCredential={proxiedRecord}/>
     });
 };
 

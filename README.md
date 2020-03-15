@@ -1,15 +1,10 @@
 ## Keeper
 
-Desktop application supporting encryption for user-defined credentials.
+Desktop application supporting encryption for user-defined credentials
 
 #### Technical stack
 
-`electron`, `nodejs`, `react`, `js`, `slds`, `jest`, `yarn`, `npm`, `bcrypt`, `crypt`
-
-#### Key features
-
-- Symmetric encryption is used (encryption key is a vital part in app lifecycle)
-- Credentials data is stored in JSON file
+`electron` `nodejs` `react` `js` `slds` `jest` `yarn` `npm` `bcrypt` `crypt` `telegram-bot-api`
 
 #### Resources used
 
@@ -17,3 +12,4 @@ Desktop application supporting encryption for user-defined credentials.
 - `https://medium.com/javascript-in-plain-english/state-management-with-react-hooks-no-redux-or-context-api-8b3035ceecf8`
 - `https://www.npmjs.com/package/lowdb`
 - `https://blog.tiger-workshop.com/add-rsync-to-git-bash-for-windows`
+- `https://core.telegram.org/bots/api`

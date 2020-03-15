@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
 import WelcomeMat from "@salesforce/design-system-react/module/components/welcome-mat";
 import Button from "@salesforce/design-system-react/module/components/button";
-import DeleteAccounts from "./DeleteAccounts";
-import SelectAccount from "./SelectAccount";
+import DeleteAccounts from "./components/DeleteAccounts";
+import SelectAccount from "./components/SelectAccount";
 import {Spinner} from "@salesforce/design-system-react";
 
 import IpcRenderController from "../../controllers/IpcRenderController";
@@ -29,10 +29,8 @@ const Welcome = () => {
 
     const handleDeleteAccounts = selectedProxiedUser => {
         setLoading(true);
-        setDeleteMode(false);
-        const promises = selectedProxiedUser.map(proxiedUser => {
-            return IpcRenderController.performAction({channelName: Channels.DELETE_ACCOUNT, data: proxiedUser.record});
-        });
+        const promises = selectedProxiedUser.map(proxiedUser =>
+            IpcRenderController.performAction({channelName: Channels.DELETE_ACCOUNT, data: proxiedUser.record}));
         Promise.all(promises)
             .then(() => {
                 let userIdsToExclude = selectedProxiedUser.map(_ => _.recordId);
@@ -40,19 +38,24 @@ const Welcome = () => {
                     proxiedUsers.filter(({recordId}) => !userIdsToExclude.includes(recordId))
                 );
                 setLoading(false);
-            });
+            })
+            .then(() => setDeleteMode(false));
     };
 
     const handleSelectAccount = proxiedUser => {
         globalActions.setUserInfo(proxiedUser.record);
         setLocale(proxiedUser.lang);
-        navService.toVault();
+        if (proxiedUser.enableTelegram2FA) {
+            navService.toTelegram2FA();
+        } else {
+            navService.toKeyConfirmation();
+        }
     };
 
     useEffect(() => {
         globalActions.setUserInfo(null);
         IpcRenderController.performAction({channelName: Channels.LOAD_ACCOUNTS})
-            .then(accounts => setProxiedUsers(accounts.map(_ => new UserProxy(_))))
+            .then(accounts => setProxiedUsers(accounts.map(_ => UserProxy.init(_))))
             .then(() => setLoading(false));
     }, [globalActions]);
 

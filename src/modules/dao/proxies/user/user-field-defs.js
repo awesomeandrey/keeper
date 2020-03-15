@@ -27,7 +27,8 @@ export default () => ({
     [UserFieldNames.SAVE_KEY]: {
         label: Label.Field_User_SaveKey,
         name: UserFieldNames.SAVE_KEY,
-        type: FieldTypes.CHECKBOX
+        type: FieldTypes.CHECKBOX,
+        value: false
     },
     [UserFieldNames.ENCRYPTION_KEY]: {
         label: Label.Field_User_EncryptionKey,
@@ -36,6 +37,25 @@ export default () => ({
         required: true,
         pattern: Patterns.EncryptionKey,
         helpText: Label.Field_User_EncryptionKey_HelpText
+    },
+    [UserFieldNames.ENABLE_TELEGRAM_2FA]: {
+        label: Label.Field_User_EnableTelegram2FA,
+        name: UserFieldNames.ENABLE_TELEGRAM_2FA,
+        type: FieldTypes.CHECKBOX,
+        value: false
+    },
+    [UserFieldNames.TELEGRAM_BOT_API_TOKEN]: {
+        label: Label.Field_User_TelegramBotToken,
+        name: UserFieldNames.TELEGRAM_BOT_API_TOKEN,
+        type: FieldTypes.TEXT,
+        helpText: Label.Form_User_TelegramBot_SetupGuide
+    },
+    [UserFieldNames.TELEGRAM_BOT_CHAT_ID]: {
+        label: Label.Field_User_TelegramBotChatId,
+        name: UserFieldNames.TELEGRAM_BOT_CHAT_ID,
+        type: FieldTypes.TEXT,
+        value: "0000",
+        readonly: true
     },
     // System field definitions;
     [UserFieldNames.DEFAULT_CREDENTIALS_FOLDER]: {

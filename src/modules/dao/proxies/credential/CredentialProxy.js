@@ -46,18 +46,26 @@ class CredentialProxy extends RecordProxy {
     castToFields(fieldDefinitions, sourceObj) {
         const standardInputFields = super.castToFields(fieldDefinitions, sourceObj);
         // Define custom fields;
-        const customInputFields = Object.keys(sourceObj)
+        const createdDateNumKey = "createdDateNum", customInputFields = Object.keys(sourceObj)
             .filter(propName => {
                 // Filter custom field definitions;
                 let fieldDef = sourceObj[propName];
                 return !!fieldDef && typeof fieldDef === "object" && fieldDef.type === FieldTypes.CUSTOM;
             })
-            .map(propName => sourceObj[propName]);
+            .map(propName => {
+                sourceObj[propName][createdDateNumKey] = sourceObj[propName][createdDateNumKey] || new Date().getTime();
+                return sourceObj[propName];
+            })
+            .sort((f1, f2) => {
+                // Sort custom fields by createdDate;
+                return f1[createdDateNumKey] - f2[createdDateNumKey];
+            });
         return [...standardInputFields, ...customInputFields];
     }
 
     castToRecord(fieldDefinitions) {
-        let objWithStandardFields = super.castToRecord(fieldDefinitions), objWithCustomFields = {};
+        let objWithStandardFields = RecordProxy.castToRecord(fieldDefinitions, {}), objWithCustomFields = {};
+        objWithStandardFields[FieldNames.ID] = this.recordId;
         if (Array.isArray(fieldDefinitions)) {
             objWithCustomFields = fieldDefinitions
                 .filter(({type, label}) => type === FieldTypes.CUSTOM && !!label)
@@ -66,7 +74,15 @@ class CredentialProxy extends RecordProxy {
                     return resultObj;
                 }, objWithCustomFields);
         }
-        return {...objWithStandardFields, ...objWithCustomFields};
+        let resultObj = {...objWithStandardFields, ...objWithCustomFields};
+        return Object.keys(resultObj).reduce((recordObj, key) => {
+            let objValue = recordObj[key];
+            if (typeof objValue !== "boolean" && !objValue) {
+                // Perform record data cleanup;
+                delete recordObj[key];
+            }
+            return recordObj;
+        }, resultObj);
     }
 
     // Custom methods;
