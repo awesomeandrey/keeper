@@ -3,6 +3,7 @@ import InputField from "./fields/input/InputField";
 import Card from "../Card";
 import ButtonGroup from "@salesforce/design-system-react/module/components/button-group";
 import Button from "@salesforce/design-system-react/module/components/button";
+import Icon from "@salesforce/design-system-react/module/components/icon";
 import {Spinner} from "@salesforce/design-system-react";
 
 import CustomEvents from "../../../modules/util/CustomEvents";
@@ -13,7 +14,15 @@ import {test, isValidUrl} from "../../../modules/util/InputValidator";
 import {Label} from "../../../modules/translation/LabelService";
 
 const EditForm = props => {
-    const {label, icon, hasCustomFields = true, loading, fields = [], onSave, onCancel} = props;
+    const {
+        label,
+        icon = <Icon category="utility" name="edit_form" size="small"/>,
+        hasCustomFields = false,
+        loading = false,
+        fields = [],
+        onSave,
+        onCancel
+    } = props;
 
     const [inputFields, setInputFields] = useState(fields);
     const [changesDetected, setChangesDetected] = useState(false);
@@ -57,16 +66,19 @@ const EditForm = props => {
     const handleAddCustomField = () => {
         const customFieldShell = {
             name: shortId.generate(),
-            type: FieldTypes.CUSTOM
+            type: FieldTypes.CUSTOM,
+            createdDateNum: new Date().getTime(),
         };
         setInputFields([...inputFields, customFieldShell]);
     };
 
     const handleDeleteCustomField = fieldDef => {
-        fieldDef.label = "";
-        fieldDef.value = "";
-        fieldDef.deleted = true;
-        handleChange(fieldDef);
+        setInputFields(
+            inputFields.filter(({name}) => name !== fieldDef.name)
+        );
+        if (!changesDetected) {
+            setChangesDetected(true);
+        }
     };
 
     const handleCancel = () => {

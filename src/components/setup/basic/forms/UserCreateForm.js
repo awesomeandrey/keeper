@@ -34,7 +34,6 @@ const UserCreateForm = props => {
         <EditForm
             label={Label.Form_User_Create}
             icon={<Icon category="standard" name="service_resource" size="medium"/>}
-            hasCustomFields={false}
             loading={loading}
             fields={inputFields}
             onSave={handleSave}

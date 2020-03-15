@@ -40,7 +40,6 @@ const ChangeEncryptionKeyPanel = props => {
             <EditForm
                 label={Label.Form_User_ChangeEncryptionKey}
                 icon={<Icon category="utility" name="yubi_key" size="small"/>}
-                hasCustomFields={false}
                 loading={loading}
                 fields={inputFields}
                 onSave={handleChangeEncryptionKey}

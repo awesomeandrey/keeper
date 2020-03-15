@@ -4,6 +4,7 @@ const Bcrypt = require("bcrypt");
 const UserFieldNames = require("../../dao/proxies/user/user-field-names");
 
 const systemFields = [
+    UserFieldNames.HASHED_ENCRYPTION_KEY,
     UserFieldNames.DEFAULT_CREDENTIALS_FOLDER,
     UserFieldNames.FILEPATH_FOR_IMPORT,
     UserFieldNames.FOLDER_FOR_EXPORT,
@@ -11,23 +12,16 @@ const systemFields = [
 ];
 
 const excludeSystemFields = userRecord => {
+    const userRecordWithoutSystemProps = Object.assign({}, userRecord);
     systemFields.forEach(propName => {
-        delete userRecord[propName];
+        delete userRecordWithoutSystemProps[propName];
     });
-    return userRecord;
+    return userRecordWithoutSystemProps;
 };
 
 class UserService {
     constructor() {
         this.configDAO = ConfigsDAO.getInstance();
-    }
-
-    getUserById(id) {
-        let foundUser = this.configDAO.selectAccountById(id);
-        if (foundUser) {
-            foundUser = excludeSystemFields(foundUser);
-        }
-        return foundUser;
     }
 
     getAllUsers() {
@@ -51,13 +45,12 @@ class UserService {
 
     saveUser(userInfo) {
         if (!userInfo[UserFieldNames.SAVE_KEY]) {
-            userInfo[UserFieldNames.ENCRYPTION_KEY] = "";
+            userInfo[UserFieldNames.ENCRYPTION_KEY] = undefined;
         }
-        userInfo[UserFieldNames.NEW_ENCRYPTION_KEY] = undefined;
-        userInfo[UserFieldNames.FOLDER_FOR_EXPORT] = undefined;
-        userInfo[UserFieldNames.FILEPATH_FOR_IMPORT] = undefined;
+        // Update last modified date;
         userInfo[UserFieldNames.LAST_MODIFIED_DATE] = new Date().getTime();
-        return this.configDAO.saveAccount(userInfo);
+        const savedUser = this.configDAO.saveAccount(userInfo);
+        return excludeSystemFields(savedUser);
     }
 
     hashEncryptionKey(userInfo) {
@@ -71,9 +64,9 @@ class UserService {
     }
 
     checkEncryptionKey(userInfo) {
-        const persistedUserInfo = this.getUserById(userInfo[UserFieldNames.ID]);
+        const userId = userInfo[UserFieldNames.ID], persistedUserInfo = this.configDAO.selectAccountById(userId);
         if (!persistedUserInfo) {
-            throw new Error(`Couldn't find account with ID=${userInfo[UserFieldNames.ID]}.`);
+            throw new Error(`Couldn't find account with ID=${userId}.`);
         }
         return Bcrypt.compareSync(
             userInfo[UserFieldNames.ENCRYPTION_KEY], // raw string

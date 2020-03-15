@@ -10,19 +10,18 @@ class FolderProxy extends RecordProxy {
         this.fields = getFolderFieldDefinitions();
     }
 
+    static init(folder) {
+        return new this(folder);
+    }
+
     static populateWithFolderOptions(fieldDef, folders) {
         const rootFolderOption = {label: Label.RootFolderName, value: ""};
         if (!fieldDef.value) {
             fieldDef.value = rootFolderOption.value;
         }
-        fieldDef.options = folders
-            .map(_ => ({label: _[FieldNames.NAME], value: _[FieldNames.ID]}));
+        fieldDef.options = folders.map(_ => ({label: _[FieldNames.NAME], value: _[FieldNames.ID]}));
         fieldDef.options.unshift(rootFolderOption);
         return fieldDef;
-    }
-
-    static init(folder) {
-        return new this(folder);
     }
 
     get fieldsForView() {

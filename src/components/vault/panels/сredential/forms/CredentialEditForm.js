@@ -35,6 +35,7 @@ const CredentialEditForm = props => {
         <EditForm
             label={Label.Form_Credential_Edit}
             loading={loading}
+            hasCustomFields={true}
             icon={<Icon category="utility" name="unlock" size="small"/>}
             fields={inputFields}
             onSave={handleSave}

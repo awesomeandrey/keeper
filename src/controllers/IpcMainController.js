@@ -58,10 +58,10 @@ const subscribeToChannels = ({app, shell, dialog, mainWindow}) => {
                 // Import DB snapshot with new encryption key;
                 DataSnapshotService.applySnapshot({fileData: newFileData, snapshot});
                 // Update user info respectively;
-                let user = UserService.getUserById(userInfo[UserFields.ID]);
-                user[UserFields.ENCRYPTION_KEY] = newEncKey;
-                user = UserService.hashEncryptionKey(user);
-                return UserService.saveUser(user);
+                let updatedUserInfo = {...userInfo};
+                updatedUserInfo[UserFields.ENCRYPTION_KEY] = newEncKey;
+                updatedUserInfo = UserService.hashEncryptionKey(updatedUserInfo);
+                return UserService.saveUser(updatedUserInfo);
             } catch (e) {
                 // Rollback policy;
                 DataSnapshotService.applySnapshot({fileData, snapshot});
@@ -174,7 +174,6 @@ const Commons = {
         const isKeyConfirmed = UserService.checkEncryptionKey(userInfo);
         if (!isKeyConfirmed) {
             throw new Error(Label.EncryptionKey_NotConfirmed);
-
         }
     },
     validateFileDataPresence(userInfo) {

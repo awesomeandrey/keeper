@@ -49,31 +49,26 @@ const OutputField = props => {
  */
 const OutputFieldContainer = props => {
     const {label, value, allowCopyToClipboard = true} = props;
-    return (
-        <div className="slds-form-element slds-form-element_edit slds-form-element_readonly slds-m-bottom--small">
-            <span className="slds-form-element__label">{label}</span>
-            <div className="slds-form-element__control">
-                {props.children}
-                {
-                    allowCopyToClipboard &&
-                    <Button
-                        iconCategory="utility"
-                        iconName="copy_to_clipboard"
-                        iconSize="small"
-                        iconVariant="bare"
-                        onClick={() => {
-                            copyToClipboard(value);
-                            CustomEvents.fire({
-                                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                                    labels: {heading: Label.ToastSuccessTitle, details: Label.Msg_CopiedToClipboard},
-                                    variant: "success"
-                                }
-                            });
-                        }}
-                        variant="icon"
-                    />
+
+    const handleClick = event => {
+        event.stopPropagation();
+        if (allowCopyToClipboard) {
+            copyToClipboard(value);
+            CustomEvents.fire({
+                eventName: ApplicationEvents.SHOW_TOAST, detail: {
+                    labels: {heading: Label.ToastSuccessTitle, details: Label.Msg_CopiedToClipboard}, variant: "success"
                 }
-            </div>
+            });
+        }
+    };
+
+    return (
+        <div
+            className="slds-form-element slds-form-element_edit slds-form-element_readonly slds-m-bottom--small hoverable"
+            onClick={handleClick}
+        >
+            <span className="slds-form-element__label">{label}</span>
+            <div className="slds-form-element__control">{props.children}</div>
         </div>
     );
 };
@@ -94,10 +89,7 @@ const OutputPassword = props => {
     const [visible, setVisible] = useState(false);
     return (
         <OutputFieldContainer {...props}>
-            <div
-                className="slds-form-element__static"
-                onClick={() => setVisible(!visible)}
-            >
+            <div className="slds-form-element__static">
                 <input
                     type={visible ? "text" : "password"}
                     style={{
@@ -106,6 +98,18 @@ const OutputPassword = props => {
                     }}
                     value={props.value}
                     disabled
+                />
+                <Button
+                    className="slds-input__icon-group slds-input__icon-group_right"
+                    iconCategory="utility"
+                    iconName={visible ? "hide" : "preview"}
+                    iconSize="medium"
+                    iconVariant="bare"
+                    onClick={event => {
+                        event.stopPropagation();
+                        setVisible(!visible)
+                    }}
+                    variant="icon"
                 />
             </div>
         </OutputFieldContainer>

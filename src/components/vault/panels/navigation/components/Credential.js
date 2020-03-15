@@ -6,17 +6,20 @@ import CustomEvents from "../../../../../modules/util/CustomEvents";
 import {ApplicationEvents} from "../../../../../constants";
 
 const Credential = props => {
-    const {credential} = props;
+    const {proxiedCredential} = props;
 
     const handleClick = event => {
         event.stopPropagation();
-        CustomEvents.fire({eventName: ApplicationEvents.SELECT_CRED_ITEM, detail: credential});
+        CustomEvents.fire({
+            eventName: ApplicationEvents.SELECT_CRED_ITEM,
+            detail: proxiedCredential.record
+        });
     };
 
     return (
         <NavigationItem
-            id={credential.recordId}
-            label={credential.name}
+            id={proxiedCredential.recordId}
+            label={proxiedCredential.name}
             iconName="drag_and_drop"
             onClick={handleClick}
         />

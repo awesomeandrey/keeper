@@ -33,7 +33,27 @@ class UserProxy extends RecordProxy {
     }
 
     set lastModifiedDate(value) {
-        return this.record[FieldNames.LAST_MODIFIED_DATE] = value;
+        this.record[FieldNames.LAST_MODIFIED_DATE] = value;
+    }
+
+    get saveKey() {
+        return this.record[FieldNames.SAVE_KEY];
+    }
+
+    get enableTelegram2FA() {
+        return this.record[FieldNames.ENABLE_TELEGRAM_2FA];
+    }
+
+    get telegramBotApiToken() {
+        return this.record[FieldNames.TELEGRAM_BOT_API_TOKEN];
+    }
+
+    get telegramBotChatId() {
+        return this.record[FieldNames.TELEGRAM_BOT_CHAT_ID];
+    }
+
+    set telegramBotChatId(value) {
+        this.record[FieldNames.TELEGRAM_BOT_CHAT_ID] = value;
     }
 
     get fieldsForView() {
@@ -68,20 +88,6 @@ class UserProxy extends RecordProxy {
 
     //********** Custom Field Sets **********
 
-    get fieldsForKeyConfirmation() {
-        return [
-            this.fields[FieldNames.FILEPATH],
-            this.fields[FieldNames.ENCRYPTION_KEY]
-        ];
-    }
-
-    get fieldsForKeyChange() {
-        return [
-            this.fields[FieldNames.ENCRYPTION_KEY],
-            this.fields[FieldNames.NEW_ENCRYPTION_KEY]
-        ];
-    }
-
     get fieldForFileImport() {
         return this.fields[FieldNames.FILEPATH_FOR_IMPORT];
     }
@@ -90,18 +96,33 @@ class UserProxy extends RecordProxy {
         return this.fields[FieldNames.FOLDER_FOR_EXPORT];
     }
 
+    //********** Custom Methods **********
+
     castToFieldsForKeyConfirmation() {
-        return this.castToFields(this.fieldsForKeyConfirmation, this.record);
+        return this.castToFields([
+            this.fields[FieldNames.FILEPATH],
+            this.fields[FieldNames.ENCRYPTION_KEY]
+        ], this.record);
     }
 
     castToFieldsForKeyChange() {
-        return this.castToFields(this.fieldsForKeyChange, {});
+        return this.castToFields([
+            this.fields[FieldNames.ENCRYPTION_KEY],
+            this.fields[FieldNames.NEW_ENCRYPTION_KEY]
+        ], {});
     }
 
     castToFieldsForPeekView() {
         return this.castToFields(
             [this.fields[FieldNames.LAST_MODIFIED_DATE]], this.record
         );
+    }
+
+    castToFieldsForTelegramBotSetup() {
+        return this.castToFields([
+            this.fields[FieldNames.TELEGRAM_BOT_API_TOKEN],
+            this.fields[FieldNames.ENABLE_TELEGRAM_2FA]
+        ], this.record);
     }
 }
 

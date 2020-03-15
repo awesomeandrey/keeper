@@ -6,8 +6,11 @@ const UserFieldNames = Object.assign(CommonFields, {
     SAVE_KEY: "saveEncryptionKey",
     ENCRYPTION_KEY: "encryptionKey",
     LAST_MODIFIED_DATE: "lastModifiedDate",
-    HASHED_ENCRYPTION_KEY: "hashedEncryptionKey",
+    ENABLE_TELEGRAM_2FA: "enableTelegramNotifications",
+    TELEGRAM_BOT_API_TOKEN: "telegramBotApiToken",
+    TELEGRAM_BOT_CHAT_ID: "telegramBotChatId",
     // System fields;
+    HASHED_ENCRYPTION_KEY: "hashedEncryptionKey",
     DEFAULT_CREDENTIALS_FOLDER: "defaultCredentialsFolder",
     FILEPATH_FOR_IMPORT: "filePathForImport",
     FOLDER_FOR_EXPORT: "folderForExport",

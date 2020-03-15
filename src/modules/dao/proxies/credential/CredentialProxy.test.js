@@ -7,7 +7,7 @@ const TEST_CUSTOM_FIELD_NAME = "custom-field-123";
 
 const SAMPLE_CREDENTIAL = {
     [CredentialFieldNames.ID]: "super-unique-record-id-123",
-    [CredentialFieldNames.TITLE]: "Test Record",
+    [CredentialFieldNames.NAME]: "Test Record",
     [TEST_CUSTOM_FIELD_NAME]: {
         label: "Custom Field Label",
         name: TEST_CUSTOM_FIELD_NAME,
@@ -37,7 +37,7 @@ describe("'CredentialProxy'", () => {
         const inputFields = credService.castToEditFields();
         const resultObject = credService.castToRecord(inputFields);
         expect(resultObject[CredentialFieldNames.ID]).toBe(SAMPLE_CREDENTIAL[CredentialFieldNames.ID]);
-        expect(resultObject[CredentialFieldNames.TITLE]).toBe(SAMPLE_CREDENTIAL[CredentialFieldNames.TITLE]);
+        expect(resultObject[CredentialFieldNames.NAME]).toBe(SAMPLE_CREDENTIAL[CredentialFieldNames.NAME]);
         expect(resultObject[TEST_CUSTOM_FIELD_NAME].value).toBe(SAMPLE_CREDENTIAL[TEST_CUSTOM_FIELD_NAME].value);
     });
 });

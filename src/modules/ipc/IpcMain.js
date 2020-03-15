@@ -23,7 +23,7 @@ IpcMain.subscribe = ({channelName, callback}) => {
                 result = callback(arg);
                 result = successResponse(result);
             } catch (e) {
-                console.log(`">>> Error occurred.\n\rChannel=${channelName}" | `, JSON.stringify(e));
+                console.log(`">>> Error occurred in channel ---${channelName}---"\n\r`, JSON.stringify(e));
                 result = failureResponse(e.message);
             }
         }

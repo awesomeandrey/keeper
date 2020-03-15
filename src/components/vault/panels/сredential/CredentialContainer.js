@@ -18,9 +18,11 @@ const CredentialContainer = props => {
 
     useEffect(() => {
         CustomEvents.register({
-            eventName: ApplicationEvents.CREATE_CRED_ITEM, callback: event => {
-                const {targetFolder} = event.detail;
-                setTargetFolder(targetFolder);
+            eventName: ApplicationEvents.SELECT_FOLDER,
+            callback: ({detail}) => setTargetFolder(detail)
+        });
+        CustomEvents.register({
+            eventName: ApplicationEvents.CREATE_CRED_ITEM, callback: () => {
                 setCredential(null);
                 setMode(FormMode.CREATE_MODE);
             }

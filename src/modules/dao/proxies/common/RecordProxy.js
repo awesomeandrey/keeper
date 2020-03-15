@@ -22,21 +22,14 @@ class RecordProxy {
     }
 
     static castToRecord(fieldDefinitions, sourceObj) {
-        let obj = {};
+        let obj = {...sourceObj};
         if (Array.isArray(fieldDefinitions)) {
             obj = fieldDefinitions.reduce((obj, {name, value}) => {
                 obj[name] = value;
                 return obj;
             }, obj);
-            Object.keys(obj).forEach(key => {
-                let objValue = obj[key];
-                if (typeof objValue !== "boolean" && !objValue) {
-                    // Perform record data cleanup;
-                    delete obj[key];
-                }
-            });
         }
-        return {...sourceObj, ...obj};
+        return obj;
     }
 
     static sameRecords(rec1, rec2) {
@@ -83,19 +76,21 @@ class RecordProxy {
         return this.castToFields(this.fieldsForEdit, this.record);
     }
 
-    // Methods below can be overridden;
-
     readFields(fieldDefinitions) {
-        const recordWithFields = this.castToRecord(fieldDefinitions);
-        this.record = {...(this.record || {}), ...recordWithFields};
+        this.record = this.castToRecord(fieldDefinitions, this.record);
         return this;
     }
+
+    // Methods below can be overridden;
 
     castToFields(fieldDefinitions, sourceObj) {
         return RecordProxy.castToFields(fieldDefinitions, sourceObj);
     }
 
-    castToRecord(fieldDefinitions) {
+    castToRecord(fieldDefinitions = []) {
+        if (!fieldDefinitions.length) {
+            return {...this.record};
+        }
         return RecordProxy.castToRecord(fieldDefinitions, this.record);
     }
 }

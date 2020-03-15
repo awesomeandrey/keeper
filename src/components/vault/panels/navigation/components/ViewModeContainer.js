@@ -15,7 +15,7 @@ const ViewModes = {
     LIST: "listMode", FOLDER: "folderMode"
 };
 
-const CredentialsViewContainer = props => {
+const ViewModeContainer = props => {
     const {folders = [], credentialsWithoutParentFolder = [], allCredentials = []} = props;
 
     const [isSearch, setSearch] = useState(false);
@@ -99,4 +99,4 @@ const FoldersView = ({folders, credentialsWithoutParentFolder}) => {
     );
 };
 
-export default CredentialsViewContainer;
+export default ViewModeContainer;
