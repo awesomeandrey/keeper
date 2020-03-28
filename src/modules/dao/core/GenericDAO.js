@@ -1,7 +1,7 @@
 const shortId = require("shortid");
 const CommonFields = require("../proxies/common/common-fields");
 
-const ID = CommonFields.ID;
+const {ID, LAST_MODIFIED_DATE} = CommonFields;
 
 class GenericDAO {
     constructor(lowDb) {
@@ -34,6 +34,7 @@ class GenericDAO {
         if (!recordId) {
             recordId = record[ID] = shortId.generate();
         }
+        record[LAST_MODIFIED_DATE] = new Date().getTime();
         this.lowDB
             .get(tableName)
             .push(record)
@@ -43,6 +44,7 @@ class GenericDAO {
 
     save({tableName, record}) {
         let recordId = record[ID];
+        record[LAST_MODIFIED_DATE] = new Date().getTime();
         if (!recordId) {
             // Create new resource;
             return this.persist({tableName, record});

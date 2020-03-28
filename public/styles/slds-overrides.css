@@ -28,3 +28,13 @@
 .slds-dropdown_length-5, .slds-dropdown--length-5 {
     max-height: 8.5rem;
 }
+
+/* Background images overrides */
+
+.slds-brand-band.dsr-brand-band_lightning-blue:before {
+    background-image: url("../images/banner-brand-default.png"), linear-gradient(to top, rgba(175, 197, 222, 0) 0, #1B5F9E) !important;
+}
+
+.slds-welcome-mat__info {
+    background-image: url("../images/bg-info@2x.png");
+}

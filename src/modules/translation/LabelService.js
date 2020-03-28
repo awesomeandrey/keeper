@@ -1,4 +1,5 @@
 import Translations from "./translations";
+
 import {LANG_CODES} from "./language-codes";
 
 const DEFAULT_LANG_CODE = LANG_CODES.EN;
@@ -26,4 +27,11 @@ export const setLocale = (lang = DEFAULT_LANG_CODE) => {
     if (window.localStorage) {
         window.localStorage.setItem(LANG_KEY, lang);
     }
+};
+
+export const getLocale = () => {
+    if (window.localStorage) {
+        return window.localStorage.getItem(LANG_KEY);
+    }
+    return DEFAULT_LANG_CODE;
 };

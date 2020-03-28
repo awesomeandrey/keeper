@@ -57,6 +57,12 @@ export default () => ({
         value: "0000",
         readonly: true
     },
+    [UserFieldNames.LAST_MODIFIED_DATE]: {
+        label: Label.Grl_Field_LastModifiedDate,
+        name: UserFieldNames.LAST_MODIFIED_DATE,
+        type: FieldTypes.DATETIME,
+        readonly: true
+    },
     // System field definitions;
     [UserFieldNames.DEFAULT_CREDENTIALS_FOLDER]: {
         label: Label.Field_User_DefaultCredentialsFolder,
@@ -88,11 +94,5 @@ export default () => ({
         required: true,
         pattern: Patterns.EncryptionKey,
         helpText: Label.Field_User_NewEncryptionKey_HelpText
-    },
-    [UserFieldNames.LAST_MODIFIED_DATE]: {
-        label: Label.Field_User_LastModifiedDate,
-        name: UserFieldNames.LAST_MODIFIED_DATE,
-        type: FieldTypes.DATETIME,
-        readonly: true
     }
 });

@@ -31,4 +31,10 @@ export default () => ({
         type: FieldTypes.LINK,
         pattern: Patterns.Url
     },
+    [CredentialFieldNames.LAST_MODIFIED_DATE]: {
+        label: Label.Grl_Field_LastModifiedDate,
+        name: CredentialFieldNames.LAST_MODIFIED_DATE,
+        type: FieldTypes.DATETIME,
+        readonly: true
+    }
 });

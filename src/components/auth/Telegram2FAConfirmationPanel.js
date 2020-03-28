@@ -13,6 +13,7 @@ import useGlobal from "../../modules/globalState";
 import {ApplicationEvents, Channels} from "../../constants";
 import {useHistory} from "react-router-dom";
 import {Label} from "../../modules/translation/LabelService";
+import Util from "../../modules/util/Util";
 
 const CONFIRMATION_COMMAND = "/confirm";
 
@@ -25,7 +26,7 @@ const Telegram2FAConfirmationPanel = () => {
 
     const sendConfirmationMessage = useCallback(() => {
         setLoading(true);
-        const CONFIRMATION_MESSAGE = `${Label.Telegram2FA_ConfirmLogin} - '${CONFIRMATION_COMMAND}'.`;
+        const CONFIRMATION_MESSAGE = `${Label.Telegram2FA_ConfirmLogin} \u{27A1} ${CONFIRMATION_COMMAND}`;
         telegramService.sendMessage(CONFIRMATION_MESSAGE)
             .then(() => CustomEvents.fire({
                 eventName: ApplicationEvents.SHOW_TOAST, detail: {
@@ -44,7 +45,7 @@ const Telegram2FAConfirmationPanel = () => {
                     setLoading(true);
                     initTelegramService(null);
                     telegramService.resetMessageListener();
-                    let message = `${Label.Telegram2FA_SuccessfulLogin} (${new Date().toLocaleString()}).`;
+                    let message = `${Label.Telegram2FA_SuccessfulLogin} \u{2705} (${Util.formatTimeStamp()}).`;
                     telegramService.sendMessage(message)
                         .then(() => navService.toKeyConfirmation());
                 }

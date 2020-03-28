@@ -25,6 +25,7 @@ export default {
     Grl_Form_CustomFieldValue: {[EN]: "Custom Field Value", [UK]: "Значення"},
     Grl_Form_AddField: {[EN]: "Add Field", [UK]: "Додати"},
     Grl_Form_DeleteField: {[EN]: "Delete", [UK]: "Видалити"},
+    Grl_Field_LastModifiedDate: {[EN]: "Last Modified Date", [UK]: "Остання дата оновлення"},
 
     // App links;
     LinkLogout: {[EN]: "Logout", [UK]: "Вийти"},
@@ -82,7 +83,7 @@ export default {
     },
     Form_User_ExportData: {[EN]: "Export", [UK]: "Експортувати"},
     Form_User_ExportDataConfirmation: {
-        [EN]: "Are you sure you want to import data?",
+        [EN]: "Are you sure you want to export data?",
         [UK]: "Ви впевнені, що бажаєте експортувати дані?"
     },
     Form_User_ExportDataError: {[EN]: "Couldn't export data!", [UK]: "Неможливо експортувати дані!"},
@@ -150,7 +151,6 @@ export default {
         [EN]: "New Encryption Key should match same pattern as previous one, but not to be identical.",
         [UK]: "Новий Секретний Ключ має відповідати тим же вимогам, що і попердній, але при цьому він має відрізнятися."
     },
-    Field_User_LastModifiedDate: {[EN]: "Last Modified Date", [UK]: "Остання дата оновлення"},
     Field_User_EnableTelegram2FA: {[EN]: "Enable Telegram 2FA", [UK]: "Увімкнути Telegram 2FA"},
     Field_User_TelegramBotToken: {[EN]: "Telegram Bot Token", [UK]: "Telegram Bot Token"},
     Field_User_TelegramBotChatId: {[EN]: "Telegram Bot Chat ID", [UK]: "Telegram Bot Chat ID"},

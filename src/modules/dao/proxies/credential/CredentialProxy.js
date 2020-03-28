@@ -31,16 +31,17 @@ class CredentialProxy extends RecordProxy {
             this.fields[FieldNames.NAME],
             this.fields[FieldNames.USERNAME_OR_LOGIN],
             this.fields[FieldNames.PASSWORD],
-            this.fields[FieldNames.WEBSITE]
+            this.fields[FieldNames.WEBSITE],
+            this.fields[FieldNames.LAST_MODIFIED_DATE]
         ];
     }
 
     get fieldsForCreate() {
-        return this.fieldsForView;
+        return this.fieldsForView.filter(({name}) => name !== FieldNames.LAST_MODIFIED_DATE);
     }
 
     get fieldsForEdit() {
-        return this.fieldsForView;
+        return this.fieldsForView.filter(({name}) => name !== FieldNames.LAST_MODIFIED_DATE);
     }
 
     get folderId() {
@@ -68,7 +69,15 @@ class CredentialProxy extends RecordProxy {
                 // Sort custom fields by createdDate;
                 return f1[createdDateNumKey] - f2[createdDateNumKey];
             });
-        return [...standardInputFields, ...customInputFields];
+        let resultingFieldDefinitions = [...standardInputFields, ...customInputFields];
+        // Push 'LAST_MODIFIED_DATE' to the end;
+        if (fieldDefinitions.some(({name}) => name === FieldNames.LAST_MODIFIED_DATE)) {
+            resultingFieldDefinitions = [
+                ...resultingFieldDefinitions.filter(({name}) => name !== FieldNames.LAST_MODIFIED_DATE),
+                resultingFieldDefinitions.find(({name}) => name === FieldNames.LAST_MODIFIED_DATE)
+            ];
+        }
+        return resultingFieldDefinitions;
     }
 
     extractFolder(fieldDefinitions) {

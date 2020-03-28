@@ -5,6 +5,7 @@ import OutputPicklist from "./components/OutputPicklist";
 
 import IpcRenderController from "../../../../../controllers/IpcRenderController";
 import CustomEvents from "../../../../../modules/util/CustomEvents";
+import Util from "../../../../../modules/util/Util";
 
 import {isValidUrl} from "../../../../../modules/util/InputValidator";
 import {ApplicationEvents, Channels, FieldTypes} from "../../../../../constants";
@@ -38,7 +39,7 @@ const OutputField = props => {
     } else if (type === FieldTypes.PICKLIST) {
         return <OutputPicklist {...props}/>;
     } else if (type === FieldTypes.DATETIME) {
-        let value = new Date(props.value).toLocaleString();
+        let value = Util.formatTimeStamp(props.value);
         return <OutputText {...props} value={value} allowCopyToClipboard={false}/>;
     }
     return <p>Unsupported field type.</p>
