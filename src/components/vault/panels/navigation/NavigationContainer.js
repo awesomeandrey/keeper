@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 import Card from "../../../commons/Card";
 import Dropdown from "@salesforce/design-system-react/module/components/menu-dropdown";
@@ -19,6 +19,22 @@ const NavigationContainer = props => {
     const [rootFolder, setRootFolder] = useState({});
     const [loading, setLoading] = useState(false);
 
+    const refreshData = useCallback(() => {
+        setLoading(true);
+        IpcRenderController.performAction({channelName: Channels.BUILD_ROOT_FOLDER_DEF, data: user})
+            .then(result => {
+                setRootFolder(result);
+            })
+            .catch(error => {
+                CustomEvents.fire({
+                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
+                        labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"
+                    }
+                });
+            })
+            .then(() => setLoading(false));
+    }, [user]);
+
     useEffect(() => {
         CustomEvents.register({
             eventName: "keydown", callback: event => {
@@ -29,23 +45,14 @@ const NavigationContainer = props => {
                 }
             }
         });
-        CustomEvents.register({
-            eventName: ApplicationEvents.REFRESH_DATA, callback: () => {
-                setLoading(true);
-                IpcRenderController.performAction({channelName: Channels.BUILD_ROOT_FOLDER_DEF, data: user})
-                    .then(_ => setRootFolder(_))
-                    .catch(error => {
-                        CustomEvents.fire({
-                            eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                                labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"
-                            }
-                        });
-                    })
-                    .then(() => setLoading(false));
-            }
-        });
+        CustomEvents.register({eventName: ApplicationEvents.REFRESH_DATA, callback: refreshData});
+
         setTimeout(() => CustomEvents.fire({eventName: ApplicationEvents.REFRESH_DATA}), 10);
-    }, [user]);
+
+        return () => {
+            CustomEvents.unregister({eventName: ApplicationEvents.REFRESH_DATA, callback: refreshData});
+        };
+    }, [user, refreshData]);
 
     return (
         <Card
