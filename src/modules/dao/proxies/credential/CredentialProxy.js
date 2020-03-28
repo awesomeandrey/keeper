@@ -43,6 +43,14 @@ class CredentialProxy extends RecordProxy {
         return this.fieldsForView;
     }
 
+    get folderId() {
+        return this.record[FieldNames.FOLDER_ID];
+    }
+
+    set folderId(value) {
+        this.record[FieldNames.FOLDER_ID] = value;
+    }
+
     castToFields(fieldDefinitions, sourceObj) {
         const standardInputFields = super.castToFields(fieldDefinitions, sourceObj);
         // Define custom fields;
@@ -63,9 +71,17 @@ class CredentialProxy extends RecordProxy {
         return [...standardInputFields, ...customInputFields];
     }
 
-    castToRecord(fieldDefinitions) {
+    extractFolder(fieldDefinitions) {
+        const folderFieldDef = fieldDefinitions.find(_ => _.name === FieldNames.FOLDER_ID);
+        this.folderId = folderFieldDef.value;
+        return this;
+    }
+
+    castToRecord(fieldDefinitions = []) {
+        if (!fieldDefinitions.length) return this.record;
         let objWithStandardFields = RecordProxy.castToRecord(fieldDefinitions, {}), objWithCustomFields = {};
         objWithStandardFields[FieldNames.ID] = this.recordId;
+        objWithStandardFields[FieldNames.FOLDER_ID] = this.folderId;
         if (Array.isArray(fieldDefinitions)) {
             objWithCustomFields = fieldDefinitions
                 .filter(({type, label}) => type === FieldTypes.CUSTOM && !!label)
