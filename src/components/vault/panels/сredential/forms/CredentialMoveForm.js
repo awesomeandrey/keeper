@@ -27,7 +27,9 @@ const CredentialMoveForm = props => {
 
     const handleMove = fields => {
         setLoading(true);
-        const credentialToUpdate = CredentialProxy.init(credential).castToRecord(fields);
+        const credentialToUpdate = CredentialProxy.init(credential)
+            .extractFolder(fields)
+            .castToRecord();
         IpcRenderController.performAction({
             channelName: Channels.SAVE_CREDENTIAL,
             data: {userInfo, credential: credentialToUpdate}
