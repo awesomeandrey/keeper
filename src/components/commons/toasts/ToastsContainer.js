@@ -33,7 +33,7 @@ const ToastsContainer = () => {
                 <Toast
                     key={toastDef.id}
                     labels={labels}
-                    duration={2500}
+                    duration={variant === "error" ? 5000 : 2500}
                     variant={variant} // error | info | success | warning;
                     onRequestClose={() => handleCloseToast(toastDef)}
                 />

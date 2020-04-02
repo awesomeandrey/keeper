@@ -13,7 +13,6 @@ import useGlobal from "../../modules/globalState";
 import {ApplicationEvents, Channels} from "../../constants";
 import {useHistory} from "react-router-dom";
 import {Label} from "../../modules/translation/LabelService";
-import Util from "../../modules/util/Util";
 
 const CONFIRMATION_COMMAND = "/confirm";
 
@@ -26,12 +25,10 @@ const Telegram2FAConfirmationPanel = () => {
 
     const sendConfirmationMessage = useCallback(() => {
         setLoading(true);
-        const CONFIRMATION_MESSAGE = `${Label.Telegram2FA_ConfirmLogin} \u{27A1} ${CONFIRMATION_COMMAND}`;
-        telegramService.sendMessage(CONFIRMATION_MESSAGE)
+        telegramService.notifyAboutLoginAttempt(CONFIRMATION_COMMAND)
             .then(() => CustomEvents.fire({
                 eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.ToastSuccessTitle, details: Label.Telegram2FA_MessageSent},
-                    variant: "success"
+                    labels: {heading: Label.ToastSuccessTitle, details: Label.Telegram2FA_MessageSent}, variant: "success"
                 }
             }))
             .then(() => setLoading(false));
@@ -45,8 +42,7 @@ const Telegram2FAConfirmationPanel = () => {
                     setLoading(true);
                     initTelegramService(null);
                     telegramService.resetMessageListener();
-                    let message = `${Label.Telegram2FA_SuccessfulLogin} \u{2705} (${Util.formatTimeStamp()}).`;
-                    telegramService.sendMessage(message)
+                    telegramService.notifyAboutSuccessfulLogin()
                         .then(() => navService.toKeyConfirmation());
                 }
             });
@@ -78,7 +74,7 @@ const Telegram2FAConfirmationPanel = () => {
             })
             .catch(error => CustomEvents.fire({
                 eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"
+                    labels: {heading: Label.ToastErrorTitle, details: error.message}, variant: "error"
                 }
             }))
             .then(() => setLoading(false));

@@ -44,8 +44,16 @@ class UserProxy extends RecordProxy {
         return this.record[FieldNames.ENABLE_TELEGRAM_2FA];
     }
 
+    set enableTelegram2FA(value) {
+        this.record[FieldNames.ENABLE_TELEGRAM_2FA] = value;
+    }
+
     get telegramBotApiToken() {
         return this.record[FieldNames.TELEGRAM_BOT_API_TOKEN];
+    }
+
+    set telegramBotApiToken(value) {
+        this.record[FieldNames.TELEGRAM_BOT_API_TOKEN] = value;
     }
 
     get telegramBotChatId() {

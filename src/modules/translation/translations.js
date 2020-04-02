@@ -178,8 +178,8 @@ export default {
     Telegram2FA_ReSend: {[EN]: "Re-send", [UK]: "Відправити заново"},
     Telegram2FA_ConfirmLogin: {[EN]: "Confirm login", [UK]: "Підтвердити вхід"},
     Telegram2FA_MessageSent: {
-        [EN]: "Please, confirm login attempt in Telegram Bot.",
-        [UK]: "Будь-ласка, підтвердіть вхід через Telegram Bot."
+        [EN]: "Please, confirm login attempt in Telegram Bot",
+        [UK]: "Будь-ласка, підтвердіть вхід через Telegram Bot"
     },
     Telegram2FA_SuccessfulLogin: {[EN]: "Successful login", [UK]: "Вхід успішно виконано"},
     Telegram2FA_BotIsIdle: {

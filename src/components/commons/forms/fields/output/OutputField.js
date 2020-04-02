@@ -63,11 +63,12 @@ const OutputFieldContainer = props => {
         }
     };
 
+    let className = "slds-form-element slds-form-element_edit slds-form-element_readonly slds-m-bottom--small";
+    if (allowCopyToClipboard) {
+        className += " hoverable";
+    }
     return (
-        <div
-            className="slds-form-element slds-form-element_edit slds-form-element_readonly slds-m-bottom--small hoverable"
-            onClick={handleClick}
-        >
+        <div className={className} onClick={handleClick}>
             <span className="slds-form-element__label">{label}</span>
             <div className="slds-form-element__control">{props.children}</div>
         </div>
@@ -92,6 +93,7 @@ const OutputPassword = props => {
         <OutputFieldContainer {...props}>
             <div className="slds-form-element__static">
                 <input
+                    className="hoverable"
                     type={visible ? "text" : "password"}
                     style={{
                         background: "rgba(0,0,0,0)",
