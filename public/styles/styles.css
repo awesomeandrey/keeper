@@ -33,13 +33,29 @@
 
 .custom-card__header {
     min-height: 8%;
-    max-height: 15%;
+    max-height: 10%;
 }
 
 .custom-card__content {
     border-top: 1px solid rgb(221, 219, 218);
-    min-height: 80%;
-    max-height: 85%;
+    height: 80%;
+}
+
+.custom-card__footer {
+    margin-top: 0;
+    min-height: 8%;
+    max-height: 10%;
+}
+
+/* DnD */
+
+.dragging-item {
+    opacity: 0;
+    background-color: #00aaff;
+}
+
+.slds-drop-zone__container:active:after {
+    border: 1px solid #1589ee;
 }
 
 /* Utility classes */

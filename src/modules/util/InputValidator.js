@@ -1,4 +1,5 @@
 const {Patterns} = require("../../constants");
+const {isUrl} = require("is-valid-url");
 
 const test = (s, p) => {
     if (typeof s !== "string" || typeof p !== "string") {
@@ -9,7 +10,7 @@ const test = (s, p) => {
 };
 
 const isValidUrl = str => {
-    return test(str, Patterns.Url);
+    return isUrl(str);
 };
 
 const isValidEncryptionKey = str => {

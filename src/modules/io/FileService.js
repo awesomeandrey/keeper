@@ -1,12 +1,12 @@
+const {app} = require("electron");
 const path = require("path");
-const os = require("os");
 const fs = require("fs");
 
 const {FileNames} = require("../../constants");
 
 const PATH_SEPARATOR = path.sep;
-const CONFIG_FOLDER_PATH = os.homedir() + PATH_SEPARATOR + FileNames.CONFIG_FOLDER;
-const CONFIG_FILE_PATH = CONFIG_FOLDER_PATH + PATH_SEPARATOR + FileNames.CONFIG_FILE;
+const CONFIG_FOLDER_PATH = app && [app.getPath("appData"), FileNames.CONFIG_FOLDER].join(PATH_SEPARATOR);
+const CONFIG_FILE_PATH = [CONFIG_FOLDER_PATH, FileNames.CONFIG_FILE].join(PATH_SEPARATOR);
 
 const resolveConfigFolder = () => {
     if (!fileExists(CONFIG_FOLDER_PATH)) {

@@ -1,17 +1,17 @@
 import React, {useState} from "react";
 import Icon from "@salesforce/design-system-react/module/components/icon";
-import ViewForm from "../../../../commons/forms/ViewForm";
+import ViewForm from "../../../commons/forms/ViewForm";
 import Button from "@salesforce/design-system-react/module/components/button";
 import ButtonGroup from "@salesforce/design-system-react/module/components/button-group";
 import Dropdown from "@salesforce/design-system-react/module/components/menu-dropdown";
 import CredentialMoveForm from "./CredentialMoveForm";
 
-import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import CustomEvents from "../../../../../modules/util/CustomEvents";
-import CredentialProxy from "../../../../../modules/dao/proxies/credential/CredentialProxy";
+import IpcRenderController from "../../../../controllers/IpcRenderController";
+import CustomEvents from "../../../../modules/util/CustomEvents";
+import CredentialProxy from "../../../../modules/dao/proxies/credential/CredentialProxy";
 
-import {ApplicationEvents, Channels} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import {ApplicationEvents, Channels} from "../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
 
 const CredentialViewForm = props => {
     const {user: userInfo, credential, onDelete} = props, proxiedCredential = new CredentialProxy(credential);

@@ -13,7 +13,7 @@ import {Label} from "../../../modules/translation/LabelService";
 const ChangeEncryptionKeyPanel = props => {
     const {user, onSave} = props, userParser = new UserProxy(user);
 
-    const [mode, setMode] = useState(FormMode.VIEW_MODE);
+    const [mode, setMode] = useState(FormMode.VIEW);
     const [loading, setLoading] = useState(false);
 
     const handleChangeEncryptionKey = fields => {
@@ -22,7 +22,7 @@ const ChangeEncryptionKeyPanel = props => {
         IpcRenderController.performAction({channelName: Channels.CHANGE_ENC_KEY, data: userInfo})
             .then(userInfo => {
                 onSave(userInfo);
-                setMode(FormMode.VIEW_MODE);
+                setMode(FormMode.VIEW);
             })
             .catch(error => {
                 CustomEvents.fire({
@@ -34,7 +34,7 @@ const ChangeEncryptionKeyPanel = props => {
             .then(() => setLoading(false));
     };
 
-    if (mode === FormMode.EDIT_MODE) {
+    if (mode === FormMode.EDIT) {
         const inputFields = userParser.castToFieldsForKeyChange();
         return (
             <EditForm
@@ -43,7 +43,7 @@ const ChangeEncryptionKeyPanel = props => {
                 loading={loading}
                 fields={inputFields}
                 onSave={handleChangeEncryptionKey}
-                onCancel={() => setMode(FormMode.VIEW_MODE)}
+                onCancel={() => setMode(FormMode.VIEW)}
             />
         );
     } else {
@@ -52,7 +52,7 @@ const ChangeEncryptionKeyPanel = props => {
                 <Button
                     label={Label.Form_User_ChangeEncryptionKey}
                     variant="brand"
-                    onClick={() => setMode(FormMode.EDIT_MODE)}
+                    onClick={() => setMode(FormMode.EDIT)}
                 />
             </div>
         );

@@ -38,3 +38,9 @@
 .slds-welcome-mat__info {
     background-image: url("../images/bg-info@2x.png");
 }
+
+/* Adjust 'Welcome Mat' container for high scale dimensions */
+
+.slds-welcome-mat_info-only .slds-welcome-mat__content {
+    height: 31rem;
+}

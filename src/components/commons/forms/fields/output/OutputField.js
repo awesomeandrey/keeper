@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Button from "@salesforce/design-system-react/module/components/button";
 import OutputCheckbox from "./components/OutputCheckbox";
 import OutputPicklist from "./components/OutputPicklist";
@@ -7,9 +7,9 @@ import IpcRenderController from "../../../../../controllers/IpcRenderController"
 import CustomEvents from "../../../../../modules/util/CustomEvents";
 import Util from "../../../../../modules/util/Util";
 
-import {isValidUrl} from "../../../../../modules/util/InputValidator";
 import {ApplicationEvents, Channels, FieldTypes} from "../../../../../constants";
 import {Label} from "../../../../../modules/translation/LabelService";
+import {isValidUrl} from "../../../../../modules/util/InputValidator";
 
 const copyToClipboard = str => {
     const element = document.createElement("textarea");
@@ -89,6 +89,12 @@ const OutputText = props => {
 
 const OutputPassword = props => {
     const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        // Hide password while switching between credentials;
+        setVisible(false);
+    }, [props.value]);
+
     return (
         <OutputFieldContainer {...props}>
             <div className="slds-form-element__static">

@@ -24,6 +24,14 @@ class FolderProxy extends RecordProxy {
         return fieldDef;
     }
 
+    get parentId() {
+        return this.record[FieldNames.PARENT_ID];
+    }
+
+    set parentId(value) {
+        this.record[FieldNames.PARENT_ID] = value;
+    }
+
     get fieldsForView() {
         return [
             this.fields[FieldNames.PARENT_ID],

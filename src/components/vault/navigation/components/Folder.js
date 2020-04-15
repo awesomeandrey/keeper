@@ -5,13 +5,12 @@ import NavigationItem from "../decorators/NavigationItem";
 import Credentials from "./Credentials";
 import Dropdown from "@salesforce/design-system-react/module/components/menu-dropdown/menu-dropdown";
 
-import CustomEvents from "../../../../../modules/util/CustomEvents";
-
-import {ApplicationEvents} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import CustomEvents from "../../../../modules/util/CustomEvents";
+import {ApplicationEvents} from "../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
 
 const Folder = props => {
-    const {proxiedFolder, credentials = [], folders: innerFolders = []} = props;
+    const {folderProxy, credentials = [], folders: innerFolders = []} = props;
 
     const [isOpened, setOpened] = useState(false);
 
@@ -20,7 +19,7 @@ const Folder = props => {
         setOpened(!isOpened);
         CustomEvents.fire({
             eventName: ApplicationEvents.SELECT_FOLDER,
-            detail: proxiedFolder.record
+            detail: folderProxy.record
         });
     };
 
@@ -29,8 +28,8 @@ const Folder = props => {
             opened={isOpened}
             navItem={
                 <NavigationItem
-                    id={proxiedFolder.recordId}
-                    label={proxiedFolder.name}
+                    id={folderProxy.recordId}
+                    label={folderProxy.name}
                     labelClassName="slds-text-title_caps"
                     iconName={isOpened ? "opened_folder" : "open_folder"}
                     onClick={handleClick}
@@ -46,12 +45,12 @@ const Folder = props => {
                             if (value === "edit") {
                                 CustomEvents.fire({
                                     eventName: ApplicationEvents.EDIT_FOLDER,
-                                    detail: proxiedFolder.record
+                                    detail: folderProxy.castToRecord()
                                 });
                             } else if (value === "delete") {
                                 CustomEvents.fire({
                                     eventName: ApplicationEvents.DELETE_FOLDER,
-                                    detail: proxiedFolder.record
+                                    detail: folderProxy.castToRecord()
                                 });
                             }
                         }}
@@ -69,7 +68,7 @@ const Folder = props => {
             }
         >
             <Folders folders={innerFolders}/>
-            <Credentials credentials={credentials}/>
+            <Credentials credentials={credentials} draggable/>
         </NavigationSection>
     );
 };

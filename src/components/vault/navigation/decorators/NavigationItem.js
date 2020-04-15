@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from "react";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 
-import CustomEvents from "../../../../../modules/util/CustomEvents";
+import CustomEvents from "../../../../modules/util/CustomEvents";
 
-import {ApplicationEvents} from "../../../../../constants";
+import {ApplicationEvents} from "../../../../constants";
 
 const NavigationItem = props => {
     const {id, label, labelClassName, iconName, onClick} = props;

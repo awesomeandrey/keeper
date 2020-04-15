@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from "react";
 import Icon from "@salesforce/design-system-react/module/components/icon";
-import EditForm from "../../../../commons/forms/EditForm";
+import EditForm from "../../../commons/forms/EditForm";
 
-import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import CredentialProxy from "../../../../../modules/dao/proxies/credential/CredentialProxy";
+import IpcRenderController from "../../../../controllers/IpcRenderController";
+import CredentialProxy from "../../../../modules/dao/proxies/credential/CredentialProxy";
 
-import {Channels} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import {Channels} from "../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
 
 const CredentialMoveForm = props => {
     const {user: userInfo, credential, onMove, onCancel} = props;

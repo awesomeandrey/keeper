@@ -2,11 +2,11 @@ import React, {useState} from "react";
 import Button from "@salesforce/design-system-react/module/components/button";
 import {Spinner} from "@salesforce/design-system-react";
 
-import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import CustomEvents from "../../../../../modules/util/CustomEvents";
+import IpcRenderController from "../../../../controllers/IpcRenderController";
+import CustomEvents from "../../../../modules/util/CustomEvents";
 
-import {ApplicationEvents, Channels} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import {ApplicationEvents, Channels} from "../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
 
 const FolderDeleteButton = props => {
     const {user: userInfo, folder, onDelete} = props;

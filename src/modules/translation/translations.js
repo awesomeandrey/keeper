@@ -67,6 +67,10 @@ export default {
     ToastWarningTitle: {[EN]: "Warning!", [UK]: "Попередження!"},
     ToastErrorTitle: {[EN]: "Error!", [UK]: "Помилка!"},
 
+    // Dnd actions;
+    DnD_MoveToRootFolder: {[EN]: "Move to ROOT folder", [UK]: "Перемістити до кореневої папки"},
+    DnD_RecentCredentials: {[EN]: "Recent credentials", [UK]: "Нещодавно обрані дані"},
+
     // CRUD Account actions;
     Form_User_View: {[EN]: "Account Info", [UK]: "Інформація про акаунт"},
     Form_User_Create: {[EN]: "Create New Account", [UK]: "Створити Новий Акаунт"},

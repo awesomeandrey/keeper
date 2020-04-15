@@ -49,6 +49,7 @@ module.exports = {
          */
         SELECT_CRED_ITEM: "selectCredItem",
         CREATE_CRED_ITEM: "createCredItem",
+        DROP_CREDENTIAL: "dropCredential",
         /**
          * Custom modal container events;
          */
@@ -57,7 +58,11 @@ module.exports = {
         /**
          * Toasts;
          */
-        SHOW_TOAST: "showToast"
+        SHOW_TOAST: "showToast",
+        /**
+         * Recent credential pills;
+         */
+        UPDATE_CRED_PILLS: "updateCredPills"
     },
     Links: {
         DEFAULT: "/",
@@ -67,15 +72,15 @@ module.exports = {
         TELEGRAM_TWO_FACTOR_CONFIRMATION: "/telegram_2fa_confirmation"
     },
     FormMode: {
-        CREATE_MODE: "create",
-        VIEW_MODE: "view",
-        EDIT_MODE: "edit"
+        CREATE: "create",
+        VIEW: "view",
+        EDIT: "edit"
     },
     FileNames: {
-        CONFIG_FOLDER: ".keeper-v3",
-        CONFIG_FILE: "keeper-v3-config.json",
-        DATA_FILE: "keeper-v3-data.json",
-        DATA_EXPORT_FILE: "keeper-v3-data-export.json",
+        CONFIG_FOLDER: "keeper-app",
+        CONFIG_FILE: "config.json",
+        DATA_FILE: "keeper-data.json",
+        DATA_EXPORT_FILE: "keeper-data-export.json"
     },
     FieldTypes: {
         TEXT: "text",
@@ -89,7 +94,6 @@ module.exports = {
         CUSTOM: "custom"
     },
     Patterns: {
-        Url: "https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)",
         EncryptionKey: "^[a-zA-Z0-9_-]{17}$"
     }
 };

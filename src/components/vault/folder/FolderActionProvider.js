@@ -3,16 +3,16 @@ import FolderEditForm from "./forms/FolderEditForm";
 import FolderCreateForm from "./forms/FolderCreateForm";
 import FolderDeleteButton from "./forms/FolderDeleteButton";
 
-import CustomEvents from "../../../../modules/util/CustomEvents";
+import CustomEvents from "../../../modules/util/CustomEvents";
 
-import {ApplicationEvents} from "../../../../constants";
-import {Label} from "../../../../modules/translation/LabelService";
+import {ApplicationEvents} from "../../../constants";
+import {Label} from "../../../modules/translation/LabelService";
 
 const closeModal = () => CustomEvents.fire({eventName: ApplicationEvents.CLOSE_MODAL});
 
 const refresh = () => CustomEvents.fire({eventName: ApplicationEvents.REFRESH_DATA});
 
-const FolderContainer = props => {
+const FolderActionProvider = props => {
     const {user} = props;
 
     const [selectedFolder, selectFolder] = useState(null);
@@ -98,4 +98,4 @@ const FolderContainer = props => {
     return <span/>;
 };
 
-export default FolderContainer;
+export default FolderActionProvider;

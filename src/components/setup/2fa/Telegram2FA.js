@@ -32,11 +32,11 @@ const validateToken = token => {
 const Telegram2FA = props => {
     const {user, onSave} = props;
 
-    const [mode, setMode] = useState(FormMode.VIEW_MODE);
+    const [mode, setMode] = useState(FormMode.VIEW);
     const [loading, setLoading] = useState(false);
 
     const handleSave = updatedUser => {
-        setMode(FormMode.VIEW_MODE);
+        setMode(FormMode.VIEW);
         setLoading(true);
         const proxiedUser = new UserProxy(updatedUser);
         if (proxiedUser.enableTelegram2FA) {
@@ -73,12 +73,12 @@ const Telegram2FA = props => {
             .then(() => setLoading(false));
     };
 
-    if (mode === FormMode.EDIT_MODE) {
+    if (mode === FormMode.EDIT) {
         return (
             <Telegram2FAEditForm
                 user={user}
                 onSave={handleSave}
-                onCancel={() => setMode(FormMode.VIEW_MODE)}
+                onCancel={() => setMode(FormMode.VIEW)}
             />
         );
     } else {
@@ -87,7 +87,7 @@ const Telegram2FA = props => {
                 user={user}
                 loading={loading}
                 onValidateConnection={validate}
-                onEdit={() => setMode(FormMode.EDIT_MODE)}
+                onEdit={() => setMode(FormMode.EDIT)}
             />
         );
     }

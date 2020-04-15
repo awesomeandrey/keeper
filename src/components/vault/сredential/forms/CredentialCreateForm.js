@@ -1,13 +1,13 @@
 import React, {useState} from "react";
-import EditForm from "../../../../commons/forms/EditForm";
+import EditForm from "../../../commons/forms/EditForm";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 
-import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import CredentialProxy from "../../../../../modules/dao/proxies/credential/CredentialProxy";
-import CustomEvents from "../../../../../modules/util/CustomEvents";
+import IpcRenderController from "../../../../controllers/IpcRenderController";
+import CredentialProxy from "../../../../modules/dao/proxies/credential/CredentialProxy";
+import CustomEvents from "../../../../modules/util/CustomEvents";
 
-import {ApplicationEvents, Channels} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import {ApplicationEvents, Channels} from "../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
 
 const CredentialCreateForm = props => {
     const {user, targetFolder, onCreate, onCancel} = props, parser = new CredentialProxy();

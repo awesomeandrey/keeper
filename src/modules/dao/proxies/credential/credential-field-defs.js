@@ -1,6 +1,6 @@
 import CredentialFieldNames from "./credential-field-names";
 
-import {FieldTypes, Patterns} from "../../../../constants";
+import {FieldTypes} from "../../../../constants";
 import {Label} from "../../../translation/LabelService";
 
 export default () => ({
@@ -28,8 +28,7 @@ export default () => ({
     [CredentialFieldNames.WEBSITE]: {
         label: Label.Field_Credential_Link,
         name: CredentialFieldNames.WEBSITE,
-        type: FieldTypes.LINK,
-        pattern: Patterns.Url
+        type: FieldTypes.LINK
     },
     [CredentialFieldNames.LAST_MODIFIED_DATE]: {
         label: Label.Grl_Field_LastModifiedDate,

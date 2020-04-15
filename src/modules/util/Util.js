@@ -9,6 +9,11 @@ class Util {
         }
         return new Date(dateNum).toLocaleString(localeParams);
     }
+
+    static isVaultEmpty(rootFolder) {
+        let {folders = [], credentialsWithoutParentFolder = [], allCredentials = []} = rootFolder;
+        return !folders.length && !credentialsWithoutParentFolder.length && !allCredentials.length;
+    }
 }
 
 export default Util;

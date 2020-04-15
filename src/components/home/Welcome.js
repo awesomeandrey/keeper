@@ -53,7 +53,7 @@ const Welcome = () => {
     };
 
     useEffect(() => {
-        globalActions.setUserInfo(null);
+        globalActions.dropState();
         IpcRenderController.performAction({channelName: Channels.LOAD_ACCOUNTS})
             .then(accounts => setProxiedUsers(accounts.map(_ => UserProxy.init(_))))
             .then(() => setLoading(false));

@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from "react";
-import EditForm from "../../../../commons/forms/EditForm";
+import EditForm from "../../../commons/forms/EditForm";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 
-import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import FolderProxy from "../../../../../modules/dao/proxies/folder/FolderProxy";
-import CustomEvents from "../../../../../modules/util/CustomEvents";
+import IpcRenderController from "../../../../controllers/IpcRenderController";
+import FolderProxy from "../../../../modules/dao/proxies/folder/FolderProxy";
+import CustomEvents from "../../../../modules/util/CustomEvents";
 
-import {Label} from "../../../../../modules/translation/LabelService";
-import {ApplicationEvents, Channels} from "../../../../../constants";
+import {Label} from "../../../../modules/translation/LabelService";
+import {ApplicationEvents, Channels} from "../../../../constants";
 
 const FolderEditForm = props => {
     const {user: userInfo, folder, onEdit, onCancel} = props;

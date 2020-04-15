@@ -15,7 +15,7 @@ const UserForm = props => {
     const {user, onCreate, onUpdate, onDelete} = props;
     const history = useHistory(), navService = NavigationService(history);
 
-    const [mode, setMode] = useState(!!user ? FormMode.VIEW_MODE : FormMode.CREATE_MODE);
+    const [mode, setMode] = useState(!!user ? FormMode.VIEW : FormMode.CREATE);
 
     const handleCreate = userInfo => {
         let proxiedUser = new UserProxy(userInfo);
@@ -26,17 +26,17 @@ const UserForm = props => {
     const handleUpdate = userInfo => {
         let proxiedUser = new UserProxy(userInfo);
         setLocale(proxiedUser.lang);
-        setMode(FormMode.VIEW_MODE);
+        setMode(FormMode.VIEW);
         onUpdate(proxiedUser.record);
         // Pass 'Label' to main process, so that all error messages are also translated;
         IpcRender.send({channelName: Channels.LOAD_APP, data: {Label}});
     };
 
     const handleCancel = () => {
-        if (mode === FormMode.CREATE_MODE) {
+        if (mode === FormMode.CREATE) {
             navService.toDefault();
-        } else if (mode === FormMode.EDIT_MODE) {
-            setMode(FormMode.VIEW_MODE);
+        } else if (mode === FormMode.EDIT) {
+            setMode(FormMode.VIEW);
         }
     };
 
@@ -45,21 +45,21 @@ const UserForm = props => {
         onDelete();
     };
 
-    if (mode === FormMode.CREATE_MODE) {
+    if (mode === FormMode.CREATE) {
         return (
             <UserCreateForm
                 onCreate={handleCreate}
                 onCancel={handleCancel}/>
         );
-    } else if (mode === FormMode.VIEW_MODE) {
+    } else if (mode === FormMode.VIEW) {
         return (
             <UserViewForm
                 user={user}
-                onEdit={() => setMode(FormMode.EDIT_MODE)}
+                onEdit={() => setMode(FormMode.EDIT)}
                 onDelete={handleDelete}
             />
         );
-    } else if (mode === FormMode.EDIT_MODE) {
+    } else if (mode === FormMode.EDIT) {
         return (
             <UserEditForm
                 user={user}
