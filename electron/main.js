@@ -2,7 +2,7 @@ const electron = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-const {app, BrowserWindow} = electron;
+const {app, BrowserWindow, Menu} = electron;
 
 let mainWindow;
 
@@ -21,7 +21,19 @@ const createWindow = () => {
     if (isDev) {
         mainWindow.webContents.openDevTools();
     } else {
-        mainWindow.setMenu(null);
+        const template = [
+            {
+                label: "View",
+                submenu: [
+                    {role: "resetzoom"},
+                    {role: "zoomin"},
+                    {role: "zoomout"},
+                    {role: "togglefullscreen"}
+                ]
+            }
+        ];
+        const menu = Menu.buildFromTemplate(template);
+        Menu.setApplicationMenu(menu);
     }
     mainWindow.loadURL(startUrl);
     mainWindow.on("closed", () => mainWindow = null);
