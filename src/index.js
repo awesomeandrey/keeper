@@ -10,14 +10,17 @@ import Vault from "./components/vault/Vault";
 import ModalsContainer from "./components/commons/modals/ModalsContainer";
 import ToastsContainer from "./components/commons/toasts/ToastsContainer";
 
+import IpcRenderController from "./controllers/IpcRenderController";
 import IpcRender from "./modules/ipc/IpcRender";
 import CustomEvents from "./modules/util/CustomEvents";
+import useGlobal from "./modules/globalState";
 
 import {Label} from "./modules/translation/LabelService";
 import {Channels, Links} from "./constants";
 import {HashRouter, Route} from "react-router-dom";
 
 const AppContainer = () => {
+    const [, globalActions] = useGlobal();
 
     useEffect(() => {
         CustomEvents.register({
@@ -26,8 +29,9 @@ const AppContainer = () => {
             capture: false
         });
         // Pass 'Label' to main process, so that all error messages are also translated;
-        IpcRender.send({channelName: Channels.LOAD_APP, data: {Label}});
-    }, []);
+        IpcRenderController.performAction({channelName: Channels.LOAD_APP, data: {Label}})
+            .then(({appVersion}) => globalActions.setAppVersion(appVersion));
+    }, [globalActions]);
 
     return (
         <IconSettings iconPath="./assets/icons">

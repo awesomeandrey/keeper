@@ -1,4 +1,9 @@
-/* SLDS overrides */
+/*
+ * SLDS stylesheet overrides
+ * -------------------------
+ */
+
+/* Global header */
 
 .slds-global-header {
     background-color: #f3f2f2;
@@ -8,22 +13,26 @@
     position: relative;
 }
 
+/* Vertical navigation */
+
 .slds-nav-vertical__action {
     padding-left: .8rem;
 }
 
-.slds-border__none {
-    border: none !important;
-}
+/* Tabs */
 
 .slds-tabs_default__content, .slds-tabs--default__content {
     padding: 0;
 }
 
+/* Toasts */
+
 .slds-notify-container, .slds-notify_container {
     width: 50%;
     transform: translate(50%);
 }
+
+/* Dropdown panel */
 
 .slds-dropdown_length-5, .slds-dropdown--length-5 {
     max-height: 8.5rem;
@@ -35,12 +44,28 @@
     background-image: url("../images/banner-brand-default.png"), linear-gradient(to top, rgba(175, 197, 222, 0) 0, #1B5F9E) !important;
 }
 
+/* Adjust 'Welcome Mat' container for high scale dimensions */
+
 .slds-welcome-mat__info {
     background-image: url("../images/bg-info@2x.png");
 }
 
-/* Adjust 'Welcome Mat' container for high scale dimensions */
-
 .slds-welcome-mat_info-only .slds-welcome-mat__content {
     height: 31rem;
+}
+
+/* Truncation */
+
+.slds-truncate_container_31 {
+    max-width: 31%;
+}
+
+.slds-truncate_container_45 {
+    max-width: 45%;
+}
+
+/* Borders */
+
+.slds-border__none {
+    border: none !important;
 }

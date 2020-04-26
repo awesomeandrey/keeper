@@ -5,9 +5,6 @@ import EmptyArea from "../../../../commons/EmptyArea";
 import {Label} from "../../../../../modules/translation/LabelService";
 
 const ListView = ({credentials = []}) => {
-
-    // TODO - come up with DnD solution on deleting credentials;
-
     return (
         <div className="slds-is-relative">
             {

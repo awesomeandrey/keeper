@@ -3,7 +3,7 @@
   "description": "Desktop application for storing user-defined credentials in a secure way.",
   "author": "Andrii Melnichuk <awispack@gmail.com>",
   "homepage": "./",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "main": "electron/main.js",
   "build": {

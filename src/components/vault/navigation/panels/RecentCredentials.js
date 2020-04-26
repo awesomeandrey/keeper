@@ -93,10 +93,19 @@ const RecentCredentials = () => {
         );
     });
 
-    if (pillElements.length) {
+    let amount = pillElements.length;
+    if (amount) {
+        let containerClass = "slds-pill_container slds-border__none ";
+        if (amount === 1) {
+            containerClass += "slds-truncate_container_75";
+        } else if (amount === 2) {
+            containerClass += "slds-truncate_container_45";
+        } else if (amount === 3) {
+            containerClass += "slds-truncate_container_31";
+        }
         return (
-            <div className="slds-pill_container slds-border__none">
-                <span className="slds-p-around--xxx-small">
+            <div className={containerClass}>
+                <span className="slds-p-vertical--xxx-small slds-p-right--xx-small">
                     <Tooltip
                         align="top left"
                         content={Label.DnD_RecentCredentials}

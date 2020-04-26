@@ -5,6 +5,7 @@ const {EN, UK} = LANG_CODES;
 export default {
     // General;
     Grl_AppName: {[EN]: "Keeper", [UK]: "Keeper"},
+    Grl_AppVersion: {[EN]: "App version", [UK]: "Версія додатку"},
     Grl_AppDescription: {
         [EN]: "Desktop app for storing credentials.",
         [UK]: "Десктопний додаток для зберігання секретних даних."

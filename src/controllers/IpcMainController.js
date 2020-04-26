@@ -20,8 +20,11 @@ let Label = {};
 const subscribeToChannels = ({app, shell, dialog, mainWindow}) => {
     IpcMain.subscribe({
         channelName: Channels.LOAD_APP, callback: data => {
+            // Pass all labels to backend in order to keep all messages translated;
             let {Label: labelsObj} = data;
             Label = labelsObj;
+            // Return application version;
+            return {appVersion: app.getVersion()};
         }
     });
     IpcMain.subscribe({channelName: Channels.QUIT_APP, callback: () => app.quit()});

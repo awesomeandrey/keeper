@@ -17,7 +17,7 @@ import {useHistory} from "react-router-dom";
 import {Label} from "../../modules/translation/LabelService";
 
 const Setup = () => {
-    const [globalState, globalActions] = useGlobal(), {userInfo} = globalState;
+    const [globalState, globalActions] = useGlobal(), {userInfo, appVersion} = globalState;
     const history = useHistory(), navService = NavigationService(history);
 
     const handleCreate = userInfo => {
@@ -51,7 +51,7 @@ const Setup = () => {
 
     return (
         <div className="keeper-pane__setup height-fill">
-            <Header user={userInfo}/>
+            <Header user={userInfo} appVersion={appVersion}/>
             <div className="slds-align--absolute-center slds-m-top--medium">
                 <div style={{minWidth: "40rem"}}>
                     <Tabs variant="default" className="slds-box slds-box--small slds-p-bottom--none">

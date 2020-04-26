@@ -10,16 +10,16 @@ import NavigationService from "../../../modules/services/NavigationService";
 import UserProxy from "../../../modules/dao/proxies/user/UserProxy";
 
 import {useHistory} from "react-router-dom";
-import {Links} from "../../../constants";
+import {FieldTypes, Links} from "../../../constants";
 import {Label} from "../../../modules/translation/LabelService";
 import {Icon} from "@salesforce/design-system-react";
 
 const Header = props => {
-    const {user} = props;
+    const {user, appVersion} = props;
 
     const history = useHistory(),
         navService = NavigationService(history),
-        proxiedUser = new UserProxy(user);
+        userProxy = new UserProxy(user);
 
     let navigationOptions = [
         {label: Label.LinkVault, value: Links.VAULT},
@@ -30,7 +30,16 @@ const Header = props => {
         navigationOptions = navigationOptions
             .filter(({value}) => value !== Links.VAULT);
     }
-    const lastActivityDateFieldDef = proxiedUser.castToFieldsForPeekView()[0];
+
+    const peekViewFields = userProxy.castToFieldsForPeekView();
+    // Compose ad-hoc field definition for rendering application version;
+    peekViewFields.push({
+        label: Label.Grl_AppVersion,
+        name: "appVersion",
+        type: FieldTypes.TEXT,
+        value: appVersion
+    });
+
     return (
         <GlobalHeader logoSrc="logo.ico">
             <GlobalHeaderSetup
@@ -47,8 +56,8 @@ const Header = props => {
                     avatar={<Icon category="action" name="new_person_account" size="x-small"/>}
                     popover={
                         <Popover
-                            heading={proxiedUser.name}
-                            body={<OutputField {...lastActivityDateFieldDef}/>}
+                            heading={userProxy.name}
+                            body={peekViewFields.map(_ => <OutputField {..._} allowCopyToClipboard={false}/>)}
                             align="bottom right"
                         >
                             <span/>
@@ -59,5 +68,7 @@ const Header = props => {
         </GlobalHeader>
     );
 };
+
+// const
 
 export default Header;
