@@ -41,8 +41,8 @@ const createDataFile = (userName, folderPath) => {
     return path;
 };
 
-const createExportDataFile = (userName, folderPath) => {
-    const path = folderPath + PATH_SEPARATOR + userName + "-" + FileNames.DATA_EXPORT_FILE;
+const createExportDataFile = (folderPath) => {
+    const path = [folderPath, FileNames.DATA_EXPORT_FILE].join(PATH_SEPARATOR);
     writeToFile(path, "");
     return path;
 };

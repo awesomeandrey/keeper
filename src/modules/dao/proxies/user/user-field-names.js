@@ -5,7 +5,7 @@ const UserFieldNames = Object.assign(CommonFields, {
     LANGUAGE: "lang",
     SAVE_KEY: "saveEncryptionKey",
     ENCRYPTION_KEY: "encryptionKey",
-    ENABLE_TELEGRAM_2FA: "enableTelegramNotifications",
+    ENABLE_TELEGRAM_2FA: "enableTelegram2FA",
     TELEGRAM_BOT_API_TOKEN: "telegramBotApiToken",
     TELEGRAM_BOT_CHAT_ID: "telegramBotChatId",
     // System fields;

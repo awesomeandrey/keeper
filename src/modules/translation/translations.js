@@ -29,7 +29,7 @@ export default {
     Grl_Field_LastModifiedDate: {[EN]: "Last Modified Date", [UK]: "Остання дата оновлення"},
 
     // App links;
-    LinkLogout: {[EN]: "Logout", [UK]: "Вийти"},
+    LinkQuit: {[EN]: "Quit", [UK]: "Вийти"},
     LinkSetup: {[EN]: "Setup", [UK]: "Налаштування"},
     LinkVault: {[EN]: "Vault", [UK]: "Секретні дані"},
 
@@ -129,10 +129,6 @@ export default {
     Field_User_DataFilePath: {[EN]: "Data File Path", [UK]: "Шлях до файлу даних"},
     Field_User_Language: {[EN]: "Language", [UK]: "Мова"},
     Field_User_SaveKey: {[EN]: "Save Encryption Key locally", [UK]: "Зберегти секретний ключ локально"},
-    Field_User_SaveKey_HelpText: {
-        [EN]: "Encryption Key will be stored on local machine.",
-        [UK]: "Ключ буде збережено на локальному пристрої."
-    },
     Field_User_EncryptionKey: {[EN]: "Encryption Key", [UK]: "Секретний Ключ"},
     Field_User_EncryptionKey_HelpText: {
         [EN]: "Key should be 17 symbols size. Only latin letters are allowed.",

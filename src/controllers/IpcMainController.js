@@ -86,9 +86,7 @@ const subscribeToChannels = ({app, shell, dialog, mainWindow}) => {
     IpcMain.subscribe({
         channelName: Channels.EXPORT_DB_SNAPSHOT, callback: ({userInfo, targetFolderPath}) => {
             Commons.validateEncryptionKey(userInfo);
-            const targetFilePath = FileService.createExportDataFile(
-                userInfo[UserFields.NAME], targetFolderPath
-            );
+            const targetFilePath = FileService.createExportDataFile(targetFolderPath);
             const fileData = Commons.getFileData(userInfo);
             DataSnapshotService.exportSnapshot({fileData, targetFilePath});
         }

@@ -24,7 +24,7 @@ const Header = props => {
     let navigationOptions = [
         {label: Label.LinkVault, value: Links.VAULT},
         {label: Label.LinkSetup, value: Links.SETUP},
-        {label: Label.LinkLogout, value: Links.DEFAULT}
+        {label: Label.LinkQuit, value: Links.DEFAULT}
     ];
     if (!user) {
         navigationOptions = navigationOptions

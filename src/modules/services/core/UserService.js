@@ -3,20 +3,32 @@ const Bcrypt = require("bcrypt");
 
 const UserFieldNames = require("../../dao/proxies/user/user-field-names");
 
-const systemFields = [
-    UserFieldNames.HASHED_ENCRYPTION_KEY,
+const tempFields = [
     UserFieldNames.DEFAULT_CREDENTIALS_FOLDER,
     UserFieldNames.FILEPATH_FOR_IMPORT,
     UserFieldNames.FOLDER_FOR_EXPORT,
     UserFieldNames.NEW_ENCRYPTION_KEY
 ];
 
-const excludeSystemFields = userRecord => {
-    const userRecordWithoutSystemProps = Object.assign({}, userRecord);
-    systemFields.forEach(propName => {
-        delete userRecordWithoutSystemProps[propName];
+const systemFields = [
+    UserFieldNames.HASHED_ENCRYPTION_KEY,
+    ...tempFields
+];
+
+const excludeFields = (record, fields) => {
+    const result = Object.assign({}, record);
+    fields.forEach(propName => {
+        delete result[propName];
     });
-    return userRecordWithoutSystemProps;
+    return result;
+};
+
+const excludeSystemFields = userRecord => {
+    return excludeFields(userRecord, systemFields);
+};
+
+const excludeTempFields = userRecord => {
+    return excludeFields(userRecord, tempFields);
 };
 
 class UserService {
@@ -44,13 +56,22 @@ class UserService {
     }
 
     saveUser(userInfo) {
-        if (!userInfo[UserFieldNames.SAVE_KEY]) {
-            userInfo[UserFieldNames.ENCRYPTION_KEY] = undefined;
+        // Copy all user info to local variable;
+        let tempUserInfo = Object.assign({}, userInfo);
+        // Delete 'ENCRYPTION_KEY' if respective setting is not populated OR equal to `false`;
+        if (!tempUserInfo[UserFieldNames.SAVE_KEY]) {
+            // Re-write prop because it can be changed;
+            tempUserInfo[UserFieldNames.ENCRYPTION_KEY] = undefined;
         }
         // Update last modified date;
-        userInfo[UserFieldNames.LAST_MODIFIED_DATE] = new Date().getTime();
-        const savedUser = this.configDAO.saveAccount(userInfo);
-        return excludeSystemFields(savedUser);
+        tempUserInfo[UserFieldNames.LAST_MODIFIED_DATE] = new Date().getTime();
+        // Exclude temporary fields;
+        tempUserInfo = excludeTempFields(tempUserInfo);
+        // Persist changes in DB source;
+        const savedUser = this.configDAO.saveAccount(tempUserInfo);
+        // Merge persisted changes into original object;
+        const resultObj = Object.assign(userInfo, savedUser);
+        return excludeSystemFields(resultObj);
     }
 
     hashEncryptionKey(userInfo) {
