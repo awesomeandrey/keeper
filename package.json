@@ -3,7 +3,7 @@
   "description": "Desktop application for storing user-defined credentials in a secure way.",
   "author": "Andrii Melnichuk <awispack@gmail.com>",
   "homepage": "./",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "private": true,
   "main": "electron/main.js",
   "build": {
@@ -26,9 +26,9 @@
   "scripts": {
     "start": "yarn run copy-slds-assets && BROWSER=none react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "copy-slds-assets": "rsync node_modules/@salesforce-ux/design-system/assets public -r",
-    "electron-dev": "concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "electron-dev": "NODE_ENV_IS_DEV=1 concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
     "preelectron-pack": "yarn run copy-slds-assets && yarn build && rsync electron build -r && rsync src build -r --exclude components --exclude *.test.js",
     "electron-pack": "yarn electron-builder \"-c.extraMetadata.main=build/electron/main.js\""
   },
@@ -58,7 +58,6 @@
     "electron": "^7.1.7",
     "electron-builder": "^21.2.0",
     "electron-rebuild": "^1.10.1",
-    "jest": "24.9.0",
     "wait-on": "^3.3.0"
   },
   "browserslist": [

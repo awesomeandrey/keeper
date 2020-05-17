@@ -5,7 +5,12 @@ const fs = require("fs");
 const {FileNames} = require("../../constants");
 
 const PATH_SEPARATOR = path.sep;
-const CONFIG_FOLDER_PATH = app && [app.getPath("appData"), FileNames.CONFIG_FOLDER].join(PATH_SEPARATOR);
+const CONFIG_FOLDER_PATH = (() => {
+    if (!app) return ""; // Workaround for unit test;
+    let isDev = process.env.NODE_ENV_IS_DEV,
+        folderName = isDev ? FileNames.CONFIG_FOLDER_DEV : FileNames.CONFIG_FOLDER;
+    return [app.getPath("appData"), folderName].join(PATH_SEPARATOR);
+})();
 const CONFIG_FILE_PATH = [CONFIG_FOLDER_PATH, FileNames.CONFIG_FILE].join(PATH_SEPARATOR);
 
 const resolveConfigFolder = () => {
@@ -36,7 +41,7 @@ const writeToFile = (filePath, content) => fs.writeFileSync(filePath, content);
 const readFromFile = filePath => fs.readFileSync(filePath, "utf8");
 
 const createDataFile = (userName, folderPath) => {
-    const path = folderPath + PATH_SEPARATOR + userName + "-" + FileNames.DATA_FILE;
+    const path = [folderPath, userName + "-" + FileNames.DATA_FILE].join(PATH_SEPARATOR);
     writeToFile(path, "");
     return path;
 };

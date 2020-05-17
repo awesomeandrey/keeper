@@ -78,6 +78,7 @@ module.exports = {
     },
     FileNames: {
         CONFIG_FOLDER: "keeper-app",
+        CONFIG_FOLDER_DEV: "keeper-app-dev",
         CONFIG_FILE: "config.json",
         DATA_FILE: "keeper-data.json",
         DATA_EXPORT_FILE: "keeper-data-export.json"
