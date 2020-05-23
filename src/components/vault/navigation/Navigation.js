@@ -61,7 +61,7 @@ const Navigation = props => {
         <Card
             label={Label.Grl_Vault}
             className="height-fill"
-            icon={<Icon category="standard" name="entitlement"/>}
+            icon={<Icon category="custom" name="custom73"/>}
             headerActions={<ActionsPanel/>}
             footer={<RecentCredentials/>}
         >

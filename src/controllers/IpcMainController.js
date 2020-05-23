@@ -1,15 +1,11 @@
 const IpcMain = require("../modules/ipc/IpcMain");
 const FileService = require("../modules/io/FileService");
-
 const UserService = require("../modules/services/core/UserService");
 const FolderService = require("../modules/services/core/FolderService");
 const CredentialService = require("../modules/services/core/CredentialService");
 const DataSnapshotService = require("../modules/services/DataSnapshotService");
 const RootFolderBuilder = require("../modules/services/root-folder-builder/RootFolderBuilder");
-
 const UserFields = require("../modules/dao/proxies/user/user-field-names");
-const packageObj = require("../../package.json");
-
 const {Channels} = require("../constants");
 
 /**
@@ -26,8 +22,7 @@ const subscribeToChannels = ({app, shell, dialog, mainWindow}) => {
             Label = labelsObj;
             // Return global application info;
             return {
-                appVersion: app.getVersion(),
-                appLink: packageObj["repository"]["url"]
+                appVersion: app.getVersion()
             };
         }
     });

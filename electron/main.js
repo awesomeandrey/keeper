@@ -2,7 +2,7 @@ const electron = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 
-const {app, BrowserWindow, Menu} = electron;
+const {app, BrowserWindow} = electron;
 
 let mainWindow;
 
@@ -18,23 +18,7 @@ const createWindow = () => {
             preload: path.join(__dirname, "preload.js")
         }
     });
-    if (isDev) {
-        mainWindow.webContents.openDevTools();
-    } else {
-        const template = [
-            {
-                label: "View",
-                submenu: [
-                    {role: "resetzoom"},
-                    {role: "zoomin"},
-                    {role: "zoomout"},
-                    {role: "togglefullscreen"}
-                ]
-            }
-        ];
-        const menu = Menu.buildFromTemplate(template);
-        Menu.setApplicationMenu(menu);
-    }
+    if (isDev) mainWindow.webContents.openDevTools();
     mainWindow.loadURL(startUrl);
     mainWindow.on("closed", () => mainWindow = null);
 };

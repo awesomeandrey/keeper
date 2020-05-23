@@ -3,13 +3,13 @@ import MediaObject from "@salesforce/design-system-react/module/components/media
 import Icon from "@salesforce/design-system-react/module/components/icon";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
-import useGlobal from "../../../modules/globalState";
 
 import {Label} from "../../../modules/translation/LabelService";
-import {Channels} from "../../../constants";
+import {Channels, General} from "../../../constants";
+
+const appLink = General.AppLink;
 
 const About = () => {
-    const [globalState] = useGlobal(), {appLink} = globalState;
 
     const handleClick = event => {
         event.preventDefault();
@@ -20,7 +20,7 @@ const About = () => {
         <MediaObject
             className="slds-m-around--small"
             verticalCenter={true}
-            figure={<Icon category="action" name="web_link" size="medium"/>}
+            figure={<Icon category="standard" name="apex" size="medium"/>}
             body={[<p>{Label.Grl_AboutApp}</p>, <a href="/" onClick={handleClick}>{appLink}</a>]}
         />
     );

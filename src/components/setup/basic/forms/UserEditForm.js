@@ -27,7 +27,7 @@ const UserEditForm = props => {
     return (
         <EditForm
             label={Label.Form_User_Edit}
-            icon={<Icon category="standard" name="service_resource" size="medium"/>}
+            icon={<Icon category="standard" name="contact" size="medium"/>}
             loading={loading}
             fields={inputFields}
             onSave={handleSave}

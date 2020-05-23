@@ -98,31 +98,12 @@ export default {
         [UK]: "Ви впевнені, що бажаєте імпортувати дані?"
     },
     Form_User_ImportDataError: {[EN]: "Couldn't import data!", [UK]: "Неможливо імпортувати дані!"},
-    Form_User_TelegramBot_SetupTitle: {[EN]: "Telegram Bot 2FA", [UK]: "Telegram Bot 2FA"},
-    Form_User_TelegramBot_SetupGuide: {
-        [EN]: "Get accessToken from Telegram [@BotFather](https://telegram.me/BotFather).",
-        [UK]: "Інструкція для налаштування Telegram Bot - [@BotFather](https://telegram.me/BotFather)."
-    },
-    Form_User_TelegramBot_ValidateConnection: {[EN]: "Validate connection", [UK]: "Перевірити з'єднання"},
-    Form_User_TelegramBot_SetupSuccess: {
-        [EN]: "Telegram Bot connection was successfully established!",
-        [UK]: "Telegram Bot успішно приєднано."
-    },
-    Form_User_TelegramBot_SetupError: {
-        [EN]: "Couldn't establish connection with Telegram Bot.",
-        [UK]: "Неможливо приєднати Telegram Bot."
-    },
-    Form_User_TelegramBot_TokenIsRequired: {
-        [EN]: "Telegram Bot API token is mandatory.",
-        [UK]: "Необхідно надати Telegram Bot API токен."
-    },
 
     // Setup tabs;
     Tab_Setup: {[EN]: "Setup Account", [UK]: "Налаштування акаунту"},
     Tab_EncryptionKey: {[EN]: "Encryption Key", [UK]: "Секретний Ключ"},
     Tab_ManageData: {[EN]: "Manage Data", [UK]: "Управління даними"},
     Tab_About: {[EN]: "About", [UK]: "Про додаток"},
-    Tab_Telegram2FA: {[EN]: "Telegram 2FA", [UK]: "Telegram 2FA"},
 
     // User fields;
     Field_User_Name: {[EN]: "Name", [UK]: "Ім'я Користувача"},

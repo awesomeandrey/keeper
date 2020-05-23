@@ -53,7 +53,7 @@ const Header = props => {
             />
             {
                 user && <GlobalHeaderProfile
-                    avatar={<Icon category="action" name="new_person_account" size="x-small"/>}
+                    avatar={<Icon category="action" name="dial_in" size="x-small"/>}
                     popover={
                         <Popover
                             heading={userProxy.name}

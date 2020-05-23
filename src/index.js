@@ -28,9 +28,8 @@ const AppContainer = () => {
         });
         // Pass 'Label' to main process, so that all error messages are also translated;
         IpcRenderController.performAction({channelName: Channels.LOAD_APP, data: {Label}})
-            .then(({appVersion, appLink}) => {
+            .then(({appVersion}) => {
                 globalActions.setAppVersion(appVersion);
-                globalActions.setAppLink(appLink);
             });
     }, [globalActions]);
 

@@ -8,15 +8,12 @@ const actions = {
     setAppVersion: (_, appVersion) => {
         _.setState({appVersion});
     },
-    setAppLink: (_, appLink) => {
-        _.setState({appLink});
-    },
     setRecentCredentials: (_, recentCredentials) => {
         _.setState({recentCredentials});
     },
     dropState: (_) => {
-        let {appVersion, appLink} = _.state; // Keeper App version value non-changed;
-        _.setState({...initialState, appVersion, appLink});
+        let {appVersion} = _.state; // Keeper App version value non-changed;
+        _.setState({...initialState, appVersion});
     }
 };
 

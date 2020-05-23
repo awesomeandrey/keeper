@@ -31,7 +31,7 @@ const UserViewForm = props => {
             label={Label.Form_User_View}
             loading={loading}
             headerActions={<FormActions {...props} onDelete={handleDelete}/>}
-            icon={<Icon category="standard" name="service_resource" size="medium"/>}
+            icon={<Icon category="standard" name="contact" size="medium"/>}
             fields={outputFields}
         />
     );

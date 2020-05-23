@@ -1,4 +1,7 @@
 module.exports = {
+    General: {
+        AppLink: "https://github.com/awesomeandrey/keeper"
+    },
     Channels: {
         /**
          * User account actions;
