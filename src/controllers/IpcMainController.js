@@ -8,6 +8,7 @@ const DataSnapshotService = require("../modules/services/DataSnapshotService");
 const RootFolderBuilder = require("../modules/services/root-folder-builder/RootFolderBuilder");
 
 const UserFields = require("../modules/dao/proxies/user/user-field-names");
+const packageObj = require("../../package.json");
 
 const {Channels} = require("../constants");
 
@@ -23,8 +24,11 @@ const subscribeToChannels = ({app, shell, dialog, mainWindow}) => {
             // Pass all labels to backend in order to keep all messages translated;
             let {Label: labelsObj} = data;
             Label = labelsObj;
-            // Return application version;
-            return {appVersion: app.getVersion()};
+            // Return global application info;
+            return {
+                appVersion: app.getVersion(),
+                appLink: packageObj["repository"]["url"]
+            };
         }
     });
     IpcMain.subscribe({channelName: Channels.QUIT_APP, callback: () => app.quit()});

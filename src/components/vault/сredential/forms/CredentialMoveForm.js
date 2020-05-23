@@ -15,21 +15,17 @@ const CredentialMoveForm = props => {
     const [inputFields, setInputFields] = useState([]);
 
     useEffect(() => {
-        const parser = CredentialProxy.init(credential);
+        const credentialProxy = new CredentialProxy(credential);
         IpcRenderController.performAction({channelName: Channels.SELECT_ALL_FOLDERS, data: userInfo})
-            .then(allFolders => {
-                setInputFields(
-                    parser.castToChangeFolderFields(allFolders)
-                );
-            })
+            .then(allFolders => setInputFields(credentialProxy.castToChangeFolderFields(allFolders)))
             .then(() => setLoading(false));
     }, [userInfo, credential]);
 
     const handleMove = fields => {
         setLoading(true);
-        const credentialToUpdate = CredentialProxy.init(credential)
-            .extractFolder(fields)
-            .castToRecord();
+        const credentialToUpdate = new CredentialProxy(credential)
+            .readFields(fields)
+            .toRecord();
         IpcRenderController.performAction({
             channelName: Channels.SAVE_CREDENTIAL,
             data: {userInfo, credential: credentialToUpdate}

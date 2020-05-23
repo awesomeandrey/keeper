@@ -68,8 +68,7 @@ module.exports = {
         DEFAULT: "/",
         SETUP: "/setup",
         VAULT: "/vault",
-        KEY_CONFIRMATION: "/key_confirmation",
-        TELEGRAM_TWO_FACTOR_CONFIRMATION: "/telegram_2fa_confirmation"
+        KEY_CONFIRMATION: "/key_confirmation"
     },
     FormMode: {
         CREATE: "create",

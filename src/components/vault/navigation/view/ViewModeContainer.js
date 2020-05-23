@@ -54,6 +54,7 @@ const ViewModeContainer = props => {
                         }
                         value={searchKeyword}
                         onChange={event => setSearchKeyword(event.target.value)}
+                        onFocus={() => setMode(ViewModes.LIST)}
                     />
                 </div>
                 <div className="slds-col slds-grow-none">

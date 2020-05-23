@@ -45,12 +45,12 @@ const Folder = props => {
                             if (value === "edit") {
                                 CustomEvents.fire({
                                     eventName: ApplicationEvents.EDIT_FOLDER,
-                                    detail: folderProxy.castToRecord()
+                                    detail: folderProxy.toRecord()
                                 });
                             } else if (value === "delete") {
                                 CustomEvents.fire({
                                     eventName: ApplicationEvents.DELETE_FOLDER,
-                                    detail: folderProxy.castToRecord()
+                                    detail: folderProxy.toRecord()
                                 });
                             }
                         }}

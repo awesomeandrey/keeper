@@ -6,11 +6,11 @@ import Button from "@salesforce/design-system-react/module/components/button";
 import Popover from "@salesforce/design-system-react/module/components/popover/popover";
 
 import IpcRenderController from "../../../../controllers/IpcRenderController";
-import CustomEvents from "../../../../modules/util/CustomEvents";
 import UserProxy from "../../../../modules/dao/proxies/user/UserProxy";
 
-import {ApplicationEvents, Channels} from "../../../../constants";
+import {Channels} from "../../../../constants";
 import {Label} from "../../../../modules/translation/LabelService";
+import {error} from "../../../../modules/util/toastify";
 
 const UserViewForm = props => {
     const {user, onDelete} = props, userParser = new UserProxy(user);
@@ -21,17 +21,11 @@ const UserViewForm = props => {
         setLoading(true);
         IpcRenderController.performAction({channelName: Channels.DELETE_ACCOUNT, data: user})
             .then(() => onDelete())
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_User_DeleteError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.Form_User_DeleteError, message: errorText}))
             .then(() => setLoading(false));
     };
 
-    const outputFields = userParser.castToViewFields();
+    const outputFields = userParser.toViewFields();
     return (
         <ViewForm
             label={Label.Form_User_View}

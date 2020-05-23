@@ -30,32 +30,27 @@ const Welcome = () => {
     const handleDeleteAccounts = selectedProxiedUser => {
         setLoading(true);
         const promises = selectedProxiedUser.map(proxiedUser =>
-            IpcRenderController.performAction({channelName: Channels.DELETE_ACCOUNT, data: proxiedUser.record}));
+            IpcRenderController.performAction({channelName: Channels.DELETE_ACCOUNT, data: proxiedUser.record})
+        );
         Promise.all(promises)
             .then(() => {
                 let userIdsToExclude = selectedProxiedUser.map(_ => _.recordId);
-                setProxiedUsers(
-                    proxiedUsers.filter(({recordId}) => !userIdsToExclude.includes(recordId))
-                );
+                setProxiedUsers(proxiedUsers.filter(({recordId}) => !userIdsToExclude.includes(recordId)));
                 setLoading(false);
-            })
-            .then(() => setDeleteMode(false));
+                setDeleteMode(false);
+            });
     };
 
     const handleSelectAccount = proxiedUser => {
         globalActions.setUserInfo(proxiedUser.record);
         setLocale(proxiedUser.lang);
-        if (proxiedUser.enableTelegram2FA) {
-            navService.toTelegram2FA();
-        } else {
-            navService.toKeyConfirmation();
-        }
+        navService.toKeyConfirmation();
     };
 
     useEffect(() => {
         globalActions.dropState();
         IpcRenderController.performAction({channelName: Channels.LOAD_ACCOUNTS})
-            .then(accounts => setProxiedUsers(accounts.map(_ => UserProxy.init(_))))
+            .then(accounts => setProxiedUsers(accounts.map(_ => new UserProxy(_))))
             .then(() => setLoading(false));
     }, [globalActions]);
 

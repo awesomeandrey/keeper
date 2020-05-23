@@ -5,7 +5,6 @@ import BrandBand from "@salesforce/design-system-react/module/components/brand-b
 import Welcome from "./components/home/Welcome";
 import Setup from "./components/setup/Setup";
 import KeyConfirmationPanel from "./components/auth/KeyConfirmationPanel";
-import Telegram2FAConfirmationPanel from "./components/auth/Telegram2FAConfirmationPanel";
 import Vault from "./components/vault/Vault";
 import ModalsContainer from "./components/commons/modals/ModalsContainer";
 import ToastsContainer from "./components/commons/toasts/ToastsContainer";
@@ -24,13 +23,15 @@ const AppContainer = () => {
 
     useEffect(() => {
         CustomEvents.register({
-            eventName: "beforeunload",
+            eventName: "beforeunload", capture: false,
             callback: () => IpcRender.send({channelName: Channels.QUIT_APP}),
-            capture: false
         });
         // Pass 'Label' to main process, so that all error messages are also translated;
         IpcRenderController.performAction({channelName: Channels.LOAD_APP, data: {Label}})
-            .then(({appVersion}) => globalActions.setAppVersion(appVersion));
+            .then(({appVersion, appLink}) => {
+                globalActions.setAppVersion(appVersion);
+                globalActions.setAppLink(appLink);
+            });
     }, [globalActions]);
 
     return (
@@ -43,8 +44,6 @@ const AppContainer = () => {
                         <Route path={Links.DEFAULT} exact component={Welcome}/>
                         <Route path={Links.SETUP} exact component={Setup}/>
                         <Route path={Links.KEY_CONFIRMATION} exact component={KeyConfirmationPanel}/>
-                        <Route path={Links.TELEGRAM_TWO_FACTOR_CONFIRMATION} exact
-                               component={Telegram2FAConfirmationPanel}/>
                         <Route path={Links.VAULT} exact component={Vault}/>
                     </HashRouter>
                 </div>

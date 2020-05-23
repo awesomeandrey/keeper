@@ -4,12 +4,11 @@ import OutputCheckbox from "./components/OutputCheckbox";
 import OutputPicklist from "./components/OutputPicklist";
 
 import IpcRenderController from "../../../../../controllers/IpcRenderController";
-import CustomEvents from "../../../../../modules/util/CustomEvents";
-import Util from "../../../../../modules/util/Util";
-
-import {ApplicationEvents, Channels, FieldTypes} from "../../../../../constants";
-import {Label} from "../../../../../modules/translation/LabelService";
+import {Channels, FieldTypes} from "../../../../../constants";
+import {getLocale, Label} from "../../../../../modules/translation/LabelService";
 import {isValidUrl} from "../../../../../modules/util/InputValidator";
+import {success} from "../../../../../modules/util/toastify";
+import {LANG_CODES} from "../../../../../modules/translation/language-codes";
 
 const copyToClipboard = str => {
     const element = document.createElement("textarea");
@@ -22,6 +21,14 @@ const copyToClipboard = str => {
     document.execCommand("copy");
     document.body.removeChild(element);
 };
+
+const formatTimeStamp = (dateNum = new Date().getTime()) => {
+    let langCode = getLocale(), localeParams = "EN-EN";
+    if (langCode === LANG_CODES.UK) {
+        localeParams = 'uk-UA';
+    }
+    return new Date(dateNum).toLocaleString(localeParams);
+}
 
 const OutputField = props => {
     const {type = FieldTypes.CUSTOM} = props;
@@ -39,7 +46,7 @@ const OutputField = props => {
     } else if (type === FieldTypes.PICKLIST) {
         return <OutputPicklist {...props}/>;
     } else if (type === FieldTypes.DATETIME) {
-        let value = Util.formatTimeStamp(props.value);
+        let value = formatTimeStamp(props.value);
         return <OutputText {...props} value={value} allowCopyToClipboard={false}/>;
     }
     return <p>Unsupported field type.</p>
@@ -55,11 +62,7 @@ const OutputFieldContainer = props => {
         event.stopPropagation();
         if (allowCopyToClipboard) {
             copyToClipboard(value);
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.ToastSuccessTitle, details: Label.Msg_CopiedToClipboard}, variant: "success"
-                }
-            });
+            success({title: Label.ToastSuccessTitle, message: Label.Msg_CopiedToClipboard});
         }
     };
 

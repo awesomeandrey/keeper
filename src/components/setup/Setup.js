@@ -3,18 +3,16 @@ import Tabs from "@salesforce/design-system-react/module/components/tabs";
 import TabsPanel from "@salesforce/design-system-react/module/components/tabs/panel";
 import Header from "../commons/header/Header";
 import UserForm from "./basic/UserForm";
-import Telegram2FA from "./2fa/Telegram2FA";
 import ChangeEncryptionKeyPanel from "./change-enc-key/ChangeEncryptionKeyPanel";
 import DataManagementPanel from "./data-management/DataManagementPanel";
 import About from "./about/About";
 
 import NavigationService from "../../modules/services/NavigationService";
-import CustomEvents from "../../modules/util/CustomEvents";
 import useGlobal from "../../modules/globalState";
 
-import {ApplicationEvents} from "../../constants";
 import {useHistory} from "react-router-dom";
 import {Label} from "../../modules/translation/LabelService";
+import {success, info} from "../../modules/util/toastify";
 
 const Setup = () => {
     const [globalState, globalActions] = useGlobal(), {userInfo, appVersion} = globalState;
@@ -23,30 +21,18 @@ const Setup = () => {
     const handleCreate = userInfo => {
         globalActions.setUserInfo(userInfo);
         navService.toVault();
-        CustomEvents.fire({
-            eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                labels: {heading: Label.ToastSuccessTitle, details: Label.Form_User_Created}, variant: "success"
-            }
-        });
+        success({title: Label.ToastSuccessTitle, message: Label.Form_User_Created});
     };
 
     const handleUpdate = userInfo => {
         globalActions.setUserInfo(userInfo);
-        CustomEvents.fire({
-            eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                labels: {heading: Label.ToastSuccessTitle, details: Label.Form_User_Edited}, variant: "success"
-            }
-        });
+        success({title: Label.ToastSuccessTitle, message: Label.Form_User_Edited});
     };
 
     const handleDelete = () => {
         globalActions.setUserInfo(null);
         navService.toDefault();
-        CustomEvents.fire({
-            eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                labels: {heading: Label.ToastSuccessTitle, details: Label.Form_User_Deleted}, variant: "info"
-            }
-        });
+        info({title: Label.ToastSuccessTitle, message: Label.Form_User_Deleted});
     };
 
     return (
@@ -63,12 +49,6 @@ const Setup = () => {
                                 onDelete={handleDelete}
                             />
                         </TabsPanel>
-                        {
-                            !!userInfo &&
-                            <TabsPanel label={Label.Tab_Telegram2FA} disabled={!userInfo}>
-                                <Telegram2FA user={userInfo} onSave={handleUpdate}/>
-                            </TabsPanel>
-                        }
                         {
                             !!userInfo &&
                             <TabsPanel label={Label.Tab_EncryptionKey}>

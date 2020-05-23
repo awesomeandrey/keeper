@@ -1,8 +1,7 @@
-import RecordProxy from "../common/RecordProxy";
 import FieldNames from "./credential-field-names";
+import RecordProxy from "../common/RecordProxy";
 import FolderProxy from "../folder/FolderProxy";
 import getCredentialFieldDefinitions from "./credential-field-defs";
-
 import {FieldTypes} from "../../../../constants.js";
 
 /**
@@ -20,10 +19,6 @@ class CredentialProxy extends RecordProxy {
     constructor(props) {
         super(props);
         this.fields = getCredentialFieldDefinitions();
-    }
-
-    static init(credential) {
-        return new this(credential);
     }
 
     get fieldsForView() {
@@ -52,8 +47,8 @@ class CredentialProxy extends RecordProxy {
         this.record[FieldNames.FOLDER_ID] = value;
     }
 
-    castToFields(fieldDefinitions, sourceObj) {
-        const standardInputFields = super.castToFields(fieldDefinitions, sourceObj);
+    toFields(fieldDefinitions, sourceObj) {
+        const standardInputFields = super.toFields(fieldDefinitions, sourceObj);
         // Define custom fields;
         const createdDateNumKey = "createdDateNum", customInputFields = Object.keys(sourceObj)
             .filter(propName => {
@@ -80,13 +75,7 @@ class CredentialProxy extends RecordProxy {
         return resultingFieldDefinitions;
     }
 
-    extractFolder(fieldDefinitions) {
-        const folderFieldDef = fieldDefinitions.find(_ => _.name === FieldNames.FOLDER_ID);
-        this.folderId = folderFieldDef.value;
-        return this;
-    }
-
-    castToRecord(fieldDefinitions = []) {
+    toRecord(fieldDefinitions = []) {
         if (!fieldDefinitions.length) return this.record;
         let objWithStandardFields = RecordProxy.castToRecord(fieldDefinitions, {}), objWithCustomFields = {};
         objWithStandardFields[FieldNames.ID] = this.recordId;
@@ -110,22 +99,13 @@ class CredentialProxy extends RecordProxy {
         }, resultObj);
     }
 
-    // Custom methods;
-
-    relateToFolder(credential, folder) {
-        if (!!folder && typeof folder === "object") {
-            let proxiedFolder = new FolderProxy(folder);
-            credential[FieldNames.FOLDER_ID] = proxiedFolder.recordId;
-        }
-    }
-
     castToChangeFolderFields(folders) {
         let nameFieldDef = this.fields[FieldNames.NAME];
         nameFieldDef.required = false;
         nameFieldDef.readonly = true;
         let folderFieldDef = this.fields[FieldNames.FOLDER_ID];
         folderFieldDef = FolderProxy.populateWithFolderOptions(folderFieldDef, folders);
-        return super.castToFields([folderFieldDef, nameFieldDef], this.record);
+        return super.toFields([folderFieldDef, nameFieldDef], this.record);
     }
 }
 

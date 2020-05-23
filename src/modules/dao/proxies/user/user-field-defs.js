@@ -38,25 +38,6 @@ export default () => ({
         pattern: Patterns.EncryptionKey,
         helpText: Label.Field_User_EncryptionKey_HelpText
     },
-    [UserFieldNames.ENABLE_TELEGRAM_2FA]: {
-        label: Label.Field_User_EnableTelegram2FA,
-        name: UserFieldNames.ENABLE_TELEGRAM_2FA,
-        type: FieldTypes.CHECKBOX,
-        value: false
-    },
-    [UserFieldNames.TELEGRAM_BOT_API_TOKEN]: {
-        label: Label.Field_User_TelegramBotToken,
-        name: UserFieldNames.TELEGRAM_BOT_API_TOKEN,
-        type: FieldTypes.TEXT,
-        helpText: Label.Form_User_TelegramBot_SetupGuide
-    },
-    [UserFieldNames.TELEGRAM_BOT_CHAT_ID]: {
-        label: Label.Field_User_TelegramBotChatId,
-        name: UserFieldNames.TELEGRAM_BOT_CHAT_ID,
-        type: FieldTypes.TEXT,
-        value: "0000",
-        readonly: true
-    },
     [UserFieldNames.LAST_MODIFIED_DATE]: {
         label: Label.Grl_Field_LastModifiedDate,
         name: UserFieldNames.LAST_MODIFIED_DATE,

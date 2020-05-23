@@ -4,10 +4,10 @@ import Icon from "@salesforce/design-system-react/module/components/icon";
 
 import IpcRenderController from "../../../../controllers/IpcRenderController";
 import UserProxy from "../../../../modules/dao/proxies/user/UserProxy";
-import CustomEvents from "../../../../modules/util/CustomEvents";
 
-import {ApplicationEvents, Channels} from "../../../../constants";
+import {Channels} from "../../../../constants";
 import {Label} from "../../../../modules/translation/LabelService";
+import {error} from "../../../../modules/util/toastify";
 
 const UserEditForm = props => {
     const {user, onEdit, onCancel} = props, userParser = new UserProxy(user);
@@ -15,21 +15,15 @@ const UserEditForm = props => {
     const [loading, setLoading] = useState(false);
 
     const handleSave = fields => {
-        const userInfo = userParser.castToRecord(fields);
+        const userInfo = userParser.toRecord(fields);
         setLoading(true);
         IpcRenderController.performAction({channelName: Channels.SAVE_ACCOUNT, data: userInfo})
             .then(user => onEdit(user))
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.ToastErrorTitle, message: errorText}))
             .then(() => setLoading(false));
     };
 
-    const inputFields = userParser.castToEditFields();
+    const inputFields = userParser.toEditFields();
     return (
         <EditForm
             label={Label.Form_User_Edit}

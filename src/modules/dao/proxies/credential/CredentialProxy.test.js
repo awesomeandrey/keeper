@@ -28,14 +28,14 @@ describe("'CredentialProxy'", () => {
     });
     test("castToViewFields()", () => {
         const credentialParser = new CredentialProxy(SAMPLE_CREDENTIAL);
-        const inputFields = credentialParser.castToViewFields();
+        const inputFields = credentialParser.toViewFields();
         expect(inputFields.some(_ => _.type === FieldTypes.CUSTOM)).toBeTruthy();
         expect(credentialParser.fieldsForCreate.length < inputFields.length).toBeTruthy();
     });
-    test("castToRecord()", () => {
+    test("toRecord()", () => {
         const credService = new CredentialProxy(SAMPLE_CREDENTIAL);
-        const inputFields = credService.castToEditFields();
-        const resultObject = credService.castToRecord(inputFields);
+        const inputFields = credService.toEditFields();
+        const resultObject = credService.toRecord(inputFields);
         expect(resultObject[CredentialFieldNames.ID]).toBe(SAMPLE_CREDENTIAL[CredentialFieldNames.ID]);
         expect(resultObject[CredentialFieldNames.NAME]).toBe(SAMPLE_CREDENTIAL[CredentialFieldNames.NAME]);
         expect(resultObject[TEST_CUSTOM_FIELD_NAME].value).toBe(SAMPLE_CREDENTIAL[TEST_CUSTOM_FIELD_NAME].value);

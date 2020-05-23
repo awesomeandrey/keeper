@@ -4,10 +4,10 @@ import Icon from "@salesforce/design-system-react/module/components/icon";
 
 import IpcRenderController from "../../../../controllers/IpcRenderController";
 import FolderProxy from "../../../../modules/dao/proxies/folder/FolderProxy";
-import CustomEvents from "../../../../modules/util/CustomEvents";
 
 import {Label} from "../../../../modules/translation/LabelService";
-import {ApplicationEvents, Channels} from "../../../../constants";
+import {Channels} from "../../../../constants";
+import {error} from "../../../../modules/util/toastify";
 
 const FolderEditForm = props => {
     const {user: userInfo, folder, parentFolder, onCreate, onCancel} = props;
@@ -18,24 +18,18 @@ const FolderEditForm = props => {
     useEffect(() => {
         IpcRenderController.performAction({channelName: Channels.SELECT_ALL_FOLDERS, data: userInfo})
             .then(allFolders => {
-                const proxiedFolder = FolderProxy.init(folder);
-                setInputFields(proxiedFolder.castToCreateFields(allFolders, parentFolder));
+                const folderProxy = new FolderProxy(folder);
+                setInputFields(folderProxy.toCreateFields(allFolders, parentFolder));
             })
             .then(() => setLoading(false));
     }, [userInfo, folder, parentFolder]);
 
     const handleCreate = fields => {
         setLoading(true);
-        const folderToCreate = FolderProxy.init(folder).readFields(fields).castToRecord();
+        const folderToCreate = new FolderProxy(folder).readFields(fields).toRecord();
         IpcRenderController.performAction({channelName: Channels.SAVE_FOLDER, data: {userInfo, folder: folderToCreate}})
             .then(_ => onCreate(_))
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_Folder_CreateError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.Form_Folder_CreateError, message: errorText}))
             .then(() => setLoading(false));
     };
 

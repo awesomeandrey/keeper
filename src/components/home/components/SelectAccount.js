@@ -9,7 +9,6 @@ const SelectAccount = props => {
     const {proxiedUsers, onSelect} = props;
 
     const getIconName = proxiedUser => {
-        if (proxiedUser.enableTelegram2FA) return "privately_shared";
         if (proxiedUser.saveKey) return "user";
         return "privately_shared";
     };
@@ -18,13 +17,8 @@ const SelectAccount = props => {
         return <EmptyArea label={Label.Grl_NoAccountsFound}/>;
     } else {
         return proxiedUsers.map(_ => (
-            <div key={_.recordId}
-                 onClick={() => onSelect(_)}
-                 className="slds-m-bottom--x-small">
-                <WelcomeMatTile
-                    title={_.name}
-                    icon={<Icon category="utility" name={getIconName(_)}/>}
-                />
+            <div key={_.recordId} onClick={() => onSelect(_)} className="slds-m-bottom--x-small">
+                <WelcomeMatTile title={_.name} icon={<Icon category="utility" name={getIconName(_)}/>}/>
             </div>
         ));
     }

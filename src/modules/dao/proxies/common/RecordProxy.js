@@ -1,13 +1,5 @@
 import CommonFields from "./common-fields";
 
-/**
- * Sample record structure:
- * {
- *      id: "",  Unique record identifier;
- *      [standardFieldName]: ""
- * }
- */
-
 class RecordProxy {
     constructor(record) {
         this.record = record || {};
@@ -64,30 +56,29 @@ class RecordProxy {
         return [];
     }
 
-    castToViewFields() {
-        return this.castToFields(this.fieldsForView, this.record);
+    toViewFields() {
+        return this.toFields(this.fieldsForView, this.record);
     }
 
-    castToCreateFields() {
-        return this.castToFields(this.fieldsForCreate, {});
+    toCreateFields() {
+        return this.toFields(this.fieldsForCreate, {});
     }
 
-    castToEditFields() {
-        return this.castToFields(this.fieldsForEdit, this.record);
+    toEditFields() {
+        return this.toFields(this.fieldsForEdit, this.record);
     }
 
     readFields(fieldDefinitions) {
-        this.record = this.castToRecord(fieldDefinitions, this.record);
+        let tempRecord = RecordProxy.castToRecord(fieldDefinitions, {});
+        this.record = {...this.record, ...tempRecord};
         return this;
     }
 
-    // Methods below can be overridden;
-
-    castToFields(fieldDefinitions, sourceObj) {
+    toFields(fieldDefinitions, sourceObj) {
         return RecordProxy.castToFields(fieldDefinitions, sourceObj);
     }
 
-    castToRecord(fieldDefinitions = []) {
+    toRecord(fieldDefinitions = []) {
         if (!fieldDefinitions.length) {
             return {...this.record};
         }

@@ -152,9 +152,6 @@ export default {
         [EN]: "New Encryption Key should match same pattern as previous one, but not to be identical.",
         [UK]: "Новий Секретний Ключ має відповідати тим же вимогам, що і попердній, але при цьому він має відрізнятися."
     },
-    Field_User_EnableTelegram2FA: {[EN]: "Enable Telegram 2FA", [UK]: "Увімкнути Telegram 2FA"},
-    Field_User_TelegramBotToken: {[EN]: "Telegram Bot Token", [UK]: "Telegram Bot Token"},
-    Field_User_TelegramBotChatId: {[EN]: "Telegram Bot Chat ID", [UK]: "Telegram Bot Chat ID"},
 
     // Key confirmation panel;
     EncryptionKey_ToConfirm: {
@@ -170,24 +167,6 @@ export default {
         [UK]: "Не можна повторно використати попередній ключ."
     },
 
-    // Telegram 2FA confirmation panel;
-    Telegram2FA_ConfirmActionTitle: {[EN]: "Login Confirmation", [UK]: "Підтвердження входу"},
-    Telegram2FA_ConfirmActionDescription: {
-        [EN]: "Please, confirm login through respective Telegram Bot.",
-        [UK]: "Будь-ласка, підтвердіть вхід через бот в Telegram."
-    },
-    Telegram2FA_ReSend: {[EN]: "Re-send", [UK]: "Відправити заново"},
-    Telegram2FA_ConfirmLogin: {[EN]: "Confirm login", [UK]: "Підтвердити вхід"},
-    Telegram2FA_MessageSent: {
-        [EN]: "Please, confirm login attempt in Telegram Bot",
-        [UK]: "Будь-ласка, підтвердіть вхід через Telegram Bot"
-    },
-    Telegram2FA_SuccessfulLogin: {[EN]: "Successful login", [UK]: "Вхід успішно виконано"},
-    Telegram2FA_BotIsIdle: {
-        [EN]: "Seems that you Telegram Bot is idle. Try writing some message to it, and re-try.",
-        [UK]: "Схоже що Ваш Telegram Bot неактивний. Спробуйте відправити йому повідомлення Й виконайте вхід знову."
-    },
-
     // Credential form;
     Form_Credential_Empty: {
         [EN]: "Please, select credential from the list.",
@@ -197,6 +176,7 @@ export default {
     Form_Credential_CreateError: {[EN]: "Couldn't create credential.", [UK]: "Не можливо створити дані."},
     Form_Credential_Edit: {[EN]: "Update Credential", [UK]: "Оновити дані"},
     Form_Credential_EditError: {[EN]: "Couldn't update credential.", [UK]: "Не можливо оновити дані."},
+    Form_Credential_DeleteError: {[EN]: "Couldn't delete credential.", [UK]: "Не можливо видалити дані."},
     Form_Credential_DeleteConfirmation: {
         [EN]: "Do you want to delete credential?",
         [UK]: "Ви впевнені, що бажаєте видалити запис?"

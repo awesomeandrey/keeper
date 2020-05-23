@@ -8,10 +8,6 @@ class UserProxy extends RecordProxy {
         this.fields = getUserFieldDefinitions();
     }
 
-    static init(user) {
-        return new this(user);
-    }
-
     get encryptionKey() {
         return this.record[FieldNames.ENCRYPTION_KEY];
     }
@@ -38,30 +34,6 @@ class UserProxy extends RecordProxy {
 
     get saveKey() {
         return this.record[FieldNames.SAVE_KEY];
-    }
-
-    get enableTelegram2FA() {
-        return this.record[FieldNames.ENABLE_TELEGRAM_2FA];
-    }
-
-    set enableTelegram2FA(value) {
-        this.record[FieldNames.ENABLE_TELEGRAM_2FA] = value;
-    }
-
-    get telegramBotApiToken() {
-        return this.record[FieldNames.TELEGRAM_BOT_API_TOKEN];
-    }
-
-    set telegramBotApiToken(value) {
-        this.record[FieldNames.TELEGRAM_BOT_API_TOKEN] = value;
-    }
-
-    get telegramBotChatId() {
-        return this.record[FieldNames.TELEGRAM_BOT_CHAT_ID];
-    }
-
-    set telegramBotChatId(value) {
-        this.record[FieldNames.TELEGRAM_BOT_CHAT_ID] = value;
     }
 
     get fieldsForView() {
@@ -107,30 +79,23 @@ class UserProxy extends RecordProxy {
     //********** Custom Methods **********
 
     castToFieldsForKeyConfirmation() {
-        return this.castToFields([
+        return this.toFields([
             this.fields[FieldNames.FILEPATH],
             this.fields[FieldNames.ENCRYPTION_KEY]
         ], this.record);
     }
 
     castToFieldsForKeyChange() {
-        return this.castToFields([
+        return this.toFields([
             this.fields[FieldNames.ENCRYPTION_KEY],
             this.fields[FieldNames.NEW_ENCRYPTION_KEY]
         ], {});
     }
 
     castToFieldsForPeekView() {
-        return this.castToFields(
+        return this.toFields(
             [this.fields[FieldNames.LAST_MODIFIED_DATE]], this.record
         );
-    }
-
-    castToFieldsForTelegramBotSetup() {
-        return this.castToFields([
-            this.fields[FieldNames.TELEGRAM_BOT_API_TOKEN],
-            this.fields[FieldNames.ENABLE_TELEGRAM_2FA]
-        ], this.record);
     }
 }
 

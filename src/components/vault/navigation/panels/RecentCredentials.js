@@ -21,7 +21,7 @@ const RecentCredentials = () => {
                 tempArray.forEach(credential => {
                     let credentialProxy = new CredentialProxy(credential);
                     if (!itemsMap.has(credentialProxy.id)) {
-                        itemsMap.set(credentialProxy.id, credentialProxy.castToRecord());
+                        itemsMap.set(credentialProxy.id, credentialProxy.toRecord());
                     }
                 });
                 tempArray = [...itemsMap.values()];
@@ -77,7 +77,7 @@ const RecentCredentials = () => {
     const pillElements = recentCredentials.map(_ => {
         let credentialProxy = new CredentialProxy(_);
         return (
-            <span className="slds-pill slds-pill_link">
+            <span className="slds-pill slds-pill_link" key={credentialProxy.recordId}>
                 <a href="/" className="slds-pill__action" onClick={event => handleClickPill(event, _)}>
                     <span className="slds-pill__label">{credentialProxy.name}</span>
                 </a>

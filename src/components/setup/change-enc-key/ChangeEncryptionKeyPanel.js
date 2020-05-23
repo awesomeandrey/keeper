@@ -4,11 +4,11 @@ import EditForm from "../../commons/forms/EditForm";
 import Button from "@salesforce/design-system-react/module/components/button";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
-import CustomEvents from "../../../modules/util/CustomEvents";
 import UserProxy from "../../../modules/dao/proxies/user/UserProxy";
 
-import {ApplicationEvents, Channels, FormMode} from "../../../constants";
+import {Channels, FormMode} from "../../../constants";
 import {Label} from "../../../modules/translation/LabelService";
+import {error} from "../../../modules/util/toastify";
 
 const ChangeEncryptionKeyPanel = props => {
     const {user, onSave} = props, userParser = new UserProxy(user);
@@ -18,19 +18,13 @@ const ChangeEncryptionKeyPanel = props => {
 
     const handleChangeEncryptionKey = fields => {
         setLoading(true);
-        const userInfo = userParser.castToRecord(fields);
+        const userInfo = userParser.toRecord(fields);
         IpcRenderController.performAction({channelName: Channels.CHANGE_ENC_KEY, data: userInfo})
             .then(userInfo => {
                 onSave(userInfo);
                 setMode(FormMode.VIEW);
             })
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_User_ChangeEncryptionKeyError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.Form_User_ChangeEncryptionKeyError, message: errorText}))
             .then(() => setLoading(false));
     };
 

@@ -4,14 +4,14 @@ import Card from "../../commons/Card";
 import ActionsPanel from "./panels/ActionsPanel";
 import ViewModeContainer from "./view/ViewModeContainer";
 import EmptyArea from "../../commons/EmptyArea";
+import RecentCredentials from "./panels/RecentCredentials";
 import {Spinner} from "@salesforce/design-system-react";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
 import CustomEvents from "../../../modules/util/CustomEvents";
-import Util from "../../../modules/util/Util";
+import {error} from "../../../modules/util/toastify";
 import {ApplicationEvents, Channels} from "../../../constants";
 import {Label} from "../../../modules/translation/LabelService";
-import RecentCredentials from "./panels/RecentCredentials";
 
 const Navigation = props => {
     const {user} = props;
@@ -23,25 +23,15 @@ const Navigation = props => {
         setLoading(true);
         IpcRenderController.performAction({channelName: Channels.BUILD_ROOT_FOLDER_DEF, data: user})
             .then(result => setRootFolder(result))
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST,
-                    detail: {labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"}
-                });
-            })
+            .catch(errorText => error({title: Label.ToastErrorTitle, message: errorText}))
             .then(() => setLoading(false));
     }, [user]);
+
     const dropCredential = useCallback(({detail: credential}) => {
         setLoading(true);
-        IpcRenderController.performAction({
-            channelName: Channels.SAVE_CREDENTIAL,
-            data: {userInfo: user, credential}
-        }).catch(error => {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST,
-                detail: {labels: {heading: Label.Form_Credential_EditError, details: error}, variant: "error"}
-            });
-        }).then(refreshData);
+        IpcRenderController.performAction({channelName: Channels.SAVE_CREDENTIAL, data: {userInfo: user, credential}})
+            .catch(errorText => error({title: Label.Form_Credential_EditError, message: errorText}))
+            .then(refreshData);
     }, [user, refreshData]);
 
     useEffect(() => {
@@ -63,7 +53,10 @@ const Navigation = props => {
         };
     }, [user, refreshData, dropCredential]);
 
-    const isVaultEmpty = Util.isVaultEmpty(rootFolder);
+    const isVaultEmpty = ((rootFolder) => {
+        let {folders = [], credentialsWithoutParentFolder = [], allCredentials = []} = rootFolder;
+        return !folders.length && !credentialsWithoutParentFolder.length && !allCredentials.length;
+    })(rootFolder);
     return (
         <Card
             label={Label.Grl_Vault}

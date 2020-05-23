@@ -10,10 +10,6 @@ class FolderProxy extends RecordProxy {
         this.fields = getFolderFieldDefinitions();
     }
 
-    static init(folder) {
-        return new this(folder);
-    }
-
     static populateWithFolderOptions(fieldDef, folders) {
         const rootFolderOption = {label: Label.RootFolderName, value: ""};
         if (!fieldDef.value) {
@@ -53,8 +49,8 @@ class FolderProxy extends RecordProxy {
         ];
     }
 
-    castToCreateFields(folders, parentFolder) {
-        return super.castToCreateFields()
+    toCreateFields(folders, parentFolder) {
+        return super.toCreateFields()
             .map(fieldDef => {
                 if (fieldDef.name === FieldNames.PARENT_ID) {
                     fieldDef = FolderProxy.populateWithFolderOptions(fieldDef, folders);
@@ -66,8 +62,8 @@ class FolderProxy extends RecordProxy {
             });
     }
 
-    castToEditFields(folders) {
-        return super.castToEditFields()
+    toEditFields(folders) {
+        return super.toEditFields()
             .map(fieldDef => {
                 if (fieldDef.name === FieldNames.PARENT_ID) {
                     fieldDef = FolderProxy.populateWithFolderOptions(fieldDef, folders);

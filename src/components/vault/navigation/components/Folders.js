@@ -19,7 +19,7 @@ const Folders = props => {
                 draggedCredentialProxy.folderId = folderProxy.id;
                 CustomEvents.fire({
                     eventName: ApplicationEvents.DROP_CREDENTIAL,
-                    detail: draggedCredentialProxy.castToRecord()
+                    detail: draggedCredentialProxy.toRecord()
                 });
             }
         }

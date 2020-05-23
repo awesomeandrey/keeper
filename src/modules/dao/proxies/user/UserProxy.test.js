@@ -16,10 +16,10 @@ describe("'UserService'", () => {
         expect(parser.fieldsForCreate).toBeInstanceOf(Array);
         expect(parser.fieldsForCreate.length).toBeTruthy();
     });
-    test("castToRecord()", () => {
+    test("toRecord()", () => {
         const userParser = new UserProxy(SAMPLE_USER_INFO);
-        const inputFields = userParser.castToEditFields();
-        const resultObject = userParser.castToRecord(inputFields);
+        const inputFields = userParser.toEditFields();
+        const resultObject = userParser.toRecord(inputFields);
         expect(resultObject[UserFieldNames.ID]).toBe(SAMPLE_USER_INFO[UserFieldNames.ID]);
         expect(resultObject[UserFieldNames.NAME]).toBe(SAMPLE_USER_INFO[UserFieldNames.NAME]);
     });

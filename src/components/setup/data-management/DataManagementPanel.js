@@ -6,11 +6,11 @@ import InputField from "../../commons/forms/fields/input/InputField";
 import {Spinner} from "@salesforce/design-system-react";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
-import CustomEvents from "../../../modules/util/CustomEvents";
 import UserProxy from "../../../modules/dao/proxies/user/UserProxy";
 
 import {Label} from "../../../modules/translation/LabelService";
-import {ApplicationEvents, Channels} from "../../../constants";
+import {Channels} from "../../../constants";
+import {success, error, warning} from "../../../modules/util/toastify";
 
 const DataManagementPanel = props => {
     const {user} = props, userParser = new UserProxy(user);
@@ -22,38 +22,20 @@ const DataManagementPanel = props => {
         setLoading(true);
         IpcRenderController.performAction({
             channelName: Channels.IMPORT_DB_SNAPSHOT, data: {userInfo: user, snapshotFilePath: fieldDef.value}
-        }).then(() => {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.ToastSuccessTitle, details: Label.ToastSuccessSubTitle}, variant: "success"
-                }
-            });
-        }).catch(error => {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.Form_User_ImportDataError, details: error}, variant: "error"
-                }
-            });
-        }).then(() => setLoading(false));
+        })
+            .then(() => success({title: Label.ToastSuccessTitle, message: Label.ToastSuccessSubTitle}))
+            .catch(errorText => error({title: Label.Form_User_ImportDataError, message: errorText}))
+            .then(() => setLoading(false));
     };
 
     const handleExport = fieldDef => {
         setLoading(true);
         IpcRenderController.performAction({
             channelName: Channels.EXPORT_DB_SNAPSHOT, data: {userInfo: user, targetFolderPath: fieldDef.value}
-        }).then(() => {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.ToastSuccessTitle, details: Label.ToastSuccessSubTitle}, variant: "success"
-                }
-            });
-        }).catch(error => {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.Form_User_ExportDataError, details: error}, variant: "error"
-                }
-            });
-        }).then(() => setLoading(false));
+        })
+            .then(() => success({title: Label.ToastSuccessTitle, message: Label.ToastSuccessSubTitle}))
+            .catch(errorText => error({title: Label.Form_User_ExportDataError, message: errorText}))
+            .then(() => setLoading(false));
     };
 
     return (
@@ -99,11 +81,7 @@ const ArtifactInputForm = props => {
 
     const handleExecuteAction = () => {
         if (!fieldDef || !fieldDef.value) {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.Form_Grl_WrongInput, details: Label.Form_Grl_VerifyInput}, variant: "warning"
-                }
-            });
+            warning({title: Label.Form_Grl_WrongInput, message: Label.Form_Grl_VerifyInput});
             return;
         }
         setShowConfirmationPopover(false);

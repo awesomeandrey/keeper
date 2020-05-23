@@ -6,12 +6,11 @@ import Button from "@salesforce/design-system-react/module/components/button";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 import {Spinner} from "@salesforce/design-system-react";
 
-import CustomEvents from "../../../modules/util/CustomEvents";
 import shortId from "shortid";
-
-import {FieldTypes, ApplicationEvents} from "../../../constants";
+import {FieldTypes} from "../../../constants";
 import {test, isValidUrl} from "../../../modules/util/InputValidator";
 import {Label} from "../../../modules/translation/LabelService";
+import {warning} from "../../../modules/util/toastify";
 
 const EditForm = props => {
     const {
@@ -54,12 +53,7 @@ const EditForm = props => {
         if (allFieldsValid && typeof onSave === "function") {
             onSave(inputFields);
         } else {
-            CustomEvents.fire({
-                eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                    labels: {heading: Label.Form_Grl_WrongInput, details: Label.Form_Grl_VerifyInput},
-                    variant: "warning"
-                }
-            });
+            warning({title: Label.Form_Grl_WrongInput, message: Label.Form_Grl_VerifyInput});
         }
     };
 

@@ -5,6 +5,7 @@ import {Spinner} from "@salesforce/design-system-react";
 import IpcRenderController from "../../../../controllers/IpcRenderController";
 import CustomEvents from "../../../../modules/util/CustomEvents";
 
+import {error} from "../../../../modules/util/toastify";
 import {ApplicationEvents, Channels} from "../../../../constants";
 import {Label} from "../../../../modules/translation/LabelService";
 
@@ -18,13 +19,7 @@ const FolderDeleteButton = props => {
         IpcRenderController.performAction({channelName: Channels.DELETE_FOLDER, data: {userInfo, folder}})
             .then(() => CustomEvents.fire({eventName: ApplicationEvents.SELECT_CRED_ITEM}))
             .then(() => onDelete())
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.ToastErrorTitle, details: error}, variant: "error"
-                    }
-                });
-            });
+            .catch(errorText => error({title: Label.ToastErrorTitle, message: errorText}))
     };
 
     return (

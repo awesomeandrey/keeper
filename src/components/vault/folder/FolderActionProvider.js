@@ -4,7 +4,6 @@ import FolderCreateForm from "./forms/FolderCreateForm";
 import FolderDeleteButton from "./forms/FolderDeleteButton";
 
 import CustomEvents from "../../../modules/util/CustomEvents";
-
 import {ApplicationEvents} from "../../../constants";
 import {Label} from "../../../modules/translation/LabelService";
 

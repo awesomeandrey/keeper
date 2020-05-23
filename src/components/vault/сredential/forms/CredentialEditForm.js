@@ -6,6 +6,7 @@ import IpcRenderController from "../../../../controllers/IpcRenderController";
 import CredentialProxy from "../../../../modules/dao/proxies/credential/CredentialProxy";
 import CustomEvents from "../../../../modules/util/CustomEvents";
 
+import {error} from "../../../../modules/util/toastify";
 import {ApplicationEvents, Channels} from "../../../../constants";
 import {Label} from "../../../../modules/translation/LabelService";
 
@@ -16,21 +17,15 @@ const CredentialEditForm = props => {
 
     const handleSave = fields => {
         setLoading(true);
-        const credential = proxiedCredential.castToRecord(fields);
+        const credential = proxiedCredential.toRecord(fields);
         IpcRenderController.performAction({channelName: Channels.SAVE_CREDENTIAL, data: {userInfo: user, credential}})
             .then(credential => onEdit(credential))
             .then(() => CustomEvents.fire({eventName: ApplicationEvents.REFRESH_DATA}))
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_Credential_EditError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.Form_Credential_EditError, message: errorText}))
             .then(() => setLoading(false));
     };
 
-    const inputFields = proxiedCredential.castToEditFields();
+    const inputFields = proxiedCredential.toEditFields();
     return (
         <EditForm
             label={Label.Form_Credential_Edit}

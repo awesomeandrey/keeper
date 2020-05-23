@@ -23,7 +23,7 @@ const FolderView = ({folders = [], credentialsWithoutParentFolder = []}) => {
             draggedCredentialProxy.folderId = ""; // Move credential to 'root' folder;
             CustomEvents.fire({
                 eventName: ApplicationEvents.DROP_CREDENTIAL,
-                detail: draggedCredentialProxy.castToRecord()
+                detail: draggedCredentialProxy.toRecord()
             });
         }
     };

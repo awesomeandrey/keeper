@@ -4,10 +4,10 @@ import Icon from "@salesforce/design-system-react/module/components/icon";
 
 import IpcRenderController from "../../../../controllers/IpcRenderController";
 import FolderProxy from "../../../../modules/dao/proxies/folder/FolderProxy";
-import CustomEvents from "../../../../modules/util/CustomEvents";
 
 import {Label} from "../../../../modules/translation/LabelService";
-import {ApplicationEvents, Channels} from "../../../../constants";
+import {Channels} from "../../../../constants";
+import {error} from "../../../../modules/util/toastify";
 
 const FolderEditForm = props => {
     const {user: userInfo, folder, onEdit, onCancel} = props;
@@ -18,24 +18,18 @@ const FolderEditForm = props => {
     useEffect(() => {
         IpcRenderController.performAction({channelName: Channels.SELECT_ALL_FOLDERS, data: userInfo})
             .then(allFolders => {
-                const proxiedFolder = FolderProxy.init(folder);
-                setInputFields(proxiedFolder.castToEditFields(allFolders));
+                const folderProxy = new FolderProxy(folder);
+                setInputFields(folderProxy.toEditFields(allFolders));
             })
             .then(() => setLoading(false));
     }, [userInfo, folder]);
 
     const handleUpdate = fields => {
         setLoading(true);
-        const updatedFolder = FolderProxy.init(folder).readFields(fields).castToRecord();
+        const updatedFolder = new FolderProxy(folder).readFields(fields).toRecord();
         IpcRenderController.performAction({channelName: Channels.SAVE_FOLDER, data: {userInfo, folder: updatedFolder}})
             .then(_ => onEdit(_))
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_Folder_EditError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .catch(errorText => error({title: Label.Form_Folder_EditError, message: errorText}))
             .then(() => setLoading(false));
     };
 

@@ -11,7 +11,7 @@ const Credential = props => {
         event.stopPropagation();
         CustomEvents.fire({
             eventName: ApplicationEvents.SELECT_CRED_ITEM,
-            detail: credentialProxy.castToRecord()
+            detail: credentialProxy.toRecord()
         });
     };
 

@@ -10,6 +10,7 @@ import IpcRenderController from "../../../../controllers/IpcRenderController";
 import CustomEvents from "../../../../modules/util/CustomEvents";
 import CredentialProxy from "../../../../modules/dao/proxies/credential/CredentialProxy";
 
+import {success, error} from "../../../../modules/util/toastify";
 import {ApplicationEvents, Channels} from "../../../../constants";
 import {Label} from "../../../../modules/translation/LabelService";
 
@@ -23,21 +24,8 @@ const CredentialViewForm = props => {
         IpcRenderController.performAction({channelName: Channels.DELETE_CREDENTIAL, data: {userInfo, credential}})
             .then(() => CustomEvents.fire({eventName: ApplicationEvents.REFRESH_DATA}))
             .then(() => onDelete())
-            .then(() => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.ToastSuccessTitle, details: Label.Form_Credential_Msg_Deleted},
-                        variant: "success"
-                    }
-                });
-            })
-            .catch(error => {
-                CustomEvents.fire({
-                    eventName: ApplicationEvents.SHOW_TOAST, detail: {
-                        labels: {heading: Label.Form_Credential_CreateError, details: error}, variant: "error"
-                    }
-                });
-            })
+            .then(() => success({title: Label.ToastSuccessTitle, message: Label.Form_Credential_Msg_Deleted}))
+            .catch(errorText => error({title: Label.Form_Credential_DeleteError, message: errorText}))
             .then(() => setLoading(false));
     };
 
@@ -62,7 +50,7 @@ const CredentialViewForm = props => {
         });
     };
 
-    const outputFields = proxiedCredential.castToViewFields();
+    const outputFields = proxiedCredential.toViewFields();
     return (
         <ViewForm
             label={proxiedCredential.name}
