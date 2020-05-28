@@ -95,7 +95,7 @@ const RecentCredentials = () => {
 
     let amount = pillElements.length;
     if (amount) {
-        let containerClass = "slds-pill_container slds-border__none ";
+        let containerClass = "slds-p-horizontal--xx-small slds-pill_container slds-border__none ";
         if (amount === 1) {
             containerClass += "slds-truncate_container_75";
         } else if (amount === 2) {

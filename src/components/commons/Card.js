@@ -5,12 +5,8 @@ const Card = props => {
     return (
         <article className={`slds-card slds-theme_default custom-card ${className}`}>
             {header || <DefaultHeader {...props}/>}
-            <div className="slds-scrollable slds-p-around--xx-small custom-card__content">
-                {children}
-            </div>
-            <footer className="slds-card__footer slds-truncate slds-align_absolute-center custom-card__footer">
-                {footer}
-            </footer>
+            <div className="slds-scrollable slds-p-around--xx-small custom-card__content">{children}</div>
+            <footer className="slds-card__footer custom-card__footer">{footer}</footer>
         </article>
     );
 };

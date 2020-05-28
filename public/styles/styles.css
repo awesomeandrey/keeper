@@ -32,34 +32,18 @@
 }
 
 .custom-card__header {
-    height: 10%;
+    max-height: 10%;
 }
 
-.custom-card__content, .custom-card__footer {
+.custom-card__content {
     border-top: 1px solid rgb(221, 219, 218);
 }
 
 .custom-card__content {
-    height: 82%;
+    height: 90%;
 }
 
 .custom-card__footer {
-    display: inherit;
-    height: 8%;
-}
-
-@media only screen and (min-width: 40em) and (max-width: 100em) {
-    .custom-card__header {
-        height: 12%;
-    }
-
-    .custom-card__footer {
-        height: 10%;
-    }
-
-    .custom-card__content {
-        height: 78%;
-    }
 }
 
 /* DnD */
@@ -74,6 +58,11 @@
 }
 
 /* Utility classes */
+
+div:empty {
+    margin: 0;
+    padding: 0;
+}
 
 .hoverable:hover {
     cursor: pointer;

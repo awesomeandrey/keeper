@@ -7,7 +7,7 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "private": true,
   "main": "electron/main.js",
   "build": {

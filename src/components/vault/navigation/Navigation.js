@@ -4,7 +4,6 @@ import Card from "../../commons/Card";
 import ActionsPanel from "./panels/ActionsPanel";
 import ViewModeContainer from "./view/ViewModeContainer";
 import EmptyArea from "../../commons/EmptyArea";
-import RecentCredentials from "./panels/RecentCredentials";
 import {Spinner} from "@salesforce/design-system-react";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
@@ -63,7 +62,6 @@ const Navigation = props => {
             className="height-fill"
             icon={<Icon category="custom" name="custom73"/>}
             headerActions={<ActionsPanel/>}
-            footer={<RecentCredentials/>}
         >
             {loading && <Spinner variant="brand" size="medium"/>}
             {!isVaultEmpty && <ViewModeContainer {...rootFolder}/>}
