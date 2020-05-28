@@ -32,19 +32,34 @@
 }
 
 .custom-card__header {
-    min-height: 8%;
-    max-height: 10%;
+    height: 10%;
+}
+
+.custom-card__content, .custom-card__footer {
+    border-top: 1px solid rgb(221, 219, 218);
 }
 
 .custom-card__content {
-    border-top: 1px solid rgb(221, 219, 218);
-    height: 80%;
+    height: 82%;
 }
 
 .custom-card__footer {
-    margin-top: 0;
-    min-height: 8%;
-    max-height: 10%;
+    display: inherit;
+    height: 8%;
+}
+
+@media only screen and (min-width: 40em) and (max-width: 100em) {
+    .custom-card__header {
+        height: 12%;
+    }
+
+    .custom-card__footer {
+        height: 10%;
+    }
+
+    .custom-card__content {
+        height: 78%;
+    }
 }
 
 /* DnD */
