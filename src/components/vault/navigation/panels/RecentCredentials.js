@@ -104,7 +104,8 @@ const RecentCredentials = () => {
             containerClass += "slds-truncate_container_31";
         }
         return (
-            <div className={containerClass}>
+            <div className="slds-box slds-box--xx-small slds-theme--default slds-m-top--xx-small">
+                <div className={containerClass}>
                 <span className="slds-p-vertical--xxx-small slds-p-right--xx-small">
                     <Tooltip
                         align="top left"
@@ -113,7 +114,8 @@ const RecentCredentials = () => {
                         dialogClassName="dialog-classname"
                     />
                 </span>
-                {pillElements}
+                    {pillElements}
+                </div>
             </div>
         );
     }

@@ -5,30 +5,10 @@ import OutputPicklist from "./components/OutputPicklist";
 
 import IpcRenderController from "../../../../../controllers/IpcRenderController";
 import {Channels, FieldTypes} from "../../../../../constants";
-import {getLocale, Label} from "../../../../../modules/translation/LabelService";
+import {Label} from "../../../../../modules/translation/LabelService";
 import {isValidUrl} from "../../../../../modules/util/InputValidator";
 import {success} from "../../../../../modules/util/toastify";
-import {LANG_CODES} from "../../../../../modules/translation/language-codes";
-
-const copyToClipboard = str => {
-    const element = document.createElement("textarea");
-    element.value = str;
-    element.setAttribute("readonly", "");
-    element.style.position = "absolute";
-    element.style.left = "-9999px";
-    document.body.appendChild(element);
-    element.select();
-    document.execCommand("copy");
-    document.body.removeChild(element);
-};
-
-const formatTimeStamp = (dateNum = new Date().getTime()) => {
-    let langCode = getLocale(), localeParams = "EN-EN";
-    if (langCode === LANG_CODES.UK) {
-        localeParams = 'uk-UA';
-    }
-    return new Date(dateNum).toLocaleString(localeParams);
-}
+import {copyToClipboard, formatTimeStamp} from "../../../../../modules/util/commons";
 
 const OutputField = props => {
     const {type = FieldTypes.CUSTOM} = props;

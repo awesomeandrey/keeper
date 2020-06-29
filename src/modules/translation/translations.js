@@ -27,6 +27,7 @@ export default {
     Grl_Form_AddField: {[EN]: "Add Field", [UK]: "Додати"},
     Grl_Form_DeleteField: {[EN]: "Delete", [UK]: "Видалити"},
     Grl_Field_LastModifiedDate: {[EN]: "Last Modified Date", [UK]: "Остання дата оновлення"},
+    Grl_Field_LastLogin: {[EN]: "Last Login Date", [UK]: "Остання дата входу"},
 
     // App links;
     LinkQuit: {[EN]: "Quit", [UK]: "Вийти"},

@@ -16,9 +16,7 @@ const Vault = () => {
                 <div className="slds-col slds-size_4-of-12">
                     <div className="height-fill" style={{display: "flex", flexDirection: "column"}}>
                         <Navigation user={userInfo}/>
-                        <div className="slds-box slds-box--xx-small slds-theme--default slds-m-top--xx-small">
-                            <RecentCredentials/>
-                        </div>
+                        <RecentCredentials/>
                     </div>
                 </div>
                 <div className="slds-col slds-size_8-of-12">
