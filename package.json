@@ -7,7 +7,7 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "private": true,
   "main": "electron/main.js",
   "build": {
@@ -23,6 +23,10 @@
     },
     "linux": {
       "target": "deb",
+      "category": "Education",
+      "icon": "build/logo.icns"
+    },
+    "mac": {
       "category": "Education",
       "icon": "build/logo.icns"
     }
@@ -53,7 +57,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "shortid": "2.2.15",
-    "use-global-hook": "^0.1.12"
+    "use-global-hook": "^0.1.12",
+    "yarn": "^1.22.10"
   },
   "devDependencies": {
     "concurrently": "^5.0.2",
