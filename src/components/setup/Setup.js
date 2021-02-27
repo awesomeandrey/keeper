@@ -40,7 +40,8 @@ const Setup = () => {
             <Header user={userInfo} appVersion={appVersion}/>
             <div className="slds-align--absolute-center slds-m-top--medium">
                 <div style={{minWidth: "40rem"}}>
-                    <Tabs variant="default" className="slds-box slds-box--small slds-p-bottom--none">
+                    <Tabs variant="default"
+                          className="slds-box slds-box--small slds-p-bottom--none slds-theme--default">
                         <TabsPanel label={Label.Tab_Setup}>
                             <UserForm
                                 user={userInfo}
