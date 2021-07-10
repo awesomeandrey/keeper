@@ -7,13 +7,16 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "4.0.6",
+  "version": "5.0.0",
+  "engines": {
+    "node": "14.21.3"
+  },
   "private": true,
   "main": "electron/main.js",
   "build": {
     "appId": "edu.keeper",
     "productName": "Keeper",
-    "copyright": "Copyright © 2020 ${author}",
+    "copyright": "Copyright © 2024 ${author}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
@@ -63,7 +66,7 @@
   "devDependencies": {
     "concurrently": "^5.0.2",
     "electron": "^7.1.7",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^24.9.1",
     "electron-rebuild": "^1.10.1",
     "wait-on": "^3.3.0"
   },

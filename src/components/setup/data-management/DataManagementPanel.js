@@ -3,7 +3,7 @@ import Button from "@salesforce/design-system-react/module/components/button";
 import Popover from "@salesforce/design-system-react/module/components/popover/popover";
 import ExpandableSection from "@salesforce/design-system-react/module/components/expandable-section";
 import InputField from "../../commons/forms/fields/input/InputField";
-import {Spinner} from "@salesforce/design-system-react";
+import {Alert, Spinner} from "@salesforce/design-system-react";
 
 import IpcRenderController from "../../../controllers/IpcRenderController";
 import UserProxy from "../../../modules/dao/proxies/user/UserProxy";
@@ -46,6 +46,7 @@ const DataManagementPanel = props => {
                 isOpen={isOpened}
                 onToggleOpen={() => setOpened(!isOpened)}
             >
+                <Alert labels={{heading: Label.Form_User_ImportWarning}} variant="warning"/>
                 <ArtifactInputForm
                     buttonLabel={Label.Form_User_ImportData}
                     confirmationMessage={Label.Form_User_ImportDataConfirmation}
@@ -58,6 +59,7 @@ const DataManagementPanel = props => {
                 isOpen={!isOpened}
                 onToggleOpen={() => setOpened(!isOpened)}
             >
+                <Alert labels={{heading: Label.Form_User_ExportWarning}} variant="warning"/>
                 <ArtifactInputForm
                     buttonLabel={Label.Form_User_ExportData}
                     confirmationMessage={Label.Form_User_ExportDataConfirmation}

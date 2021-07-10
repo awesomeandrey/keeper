@@ -12,15 +12,13 @@ const actions = {
         _.setState({recentCredentials});
     },
     dropState: (_) => {
-        let {appVersion} = _.state; // Keeper App version value non-changed;
-        _.setState({...initialState, appVersion});
+        _.setState({..._.state, ...initialState});
     }
 };
 
 const initialState = {
     userInfo: null,
-    recentCredentials: [],
-    appVersion: null
+    recentCredentials: []
 };
 
 const useGlobal = useGlobalHook(React, initialState, actions);

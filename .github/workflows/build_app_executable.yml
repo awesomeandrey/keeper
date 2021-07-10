@@ -1,0 +1,71 @@
+name: Build App Executable 🔫
+
+on:
+  schedule:
+    # This expression will trigger the workflow at 9:00 AM (UTC time) on the 1st and 15th of each month.
+    - cron: '0 9 1,15 * *'
+  workflow_dispatch:
+    branches:
+      - main
+      - master
+      - develop
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  build-for-ubuntu:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+      - name: 'Install Dependencies'
+        run: npm install
+      - name: 'Electron Build'
+        run: npm run electron-pack -- --publish never
+      - name: 'Upload Debian Package (DEB)'
+        uses: actions/upload-artifact@v4
+        with:
+          name: keeper-ubuntu-deb
+          path: dist/*.deb
+          retention-days: 5
+  build-for-mac:
+    runs-on: macos-12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+      - name: 'Install Dependencies'
+        run: npm install
+      - name: 'Electron Build'
+        run: npm run electron-pack -- --publish never
+      - name: 'Upload Disk Image (DMG)'
+        uses: actions/upload-artifact@v4
+        with:
+          name: keeper-mac-dmg
+          path: dist/*.dmg
+          retention-days: 5
+  build-for-win:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+      - uses: GuillaumeFalourd/setup-rsync@v1.2
+      - run: rsync --version
+      - name: 'Install Dependencies'
+        run: npm install
+      - name: 'Electron Build'
+        run: npm run electron-pack -- --publish never
+      - name: 'Upload Windows Executable (EXE)'
+        uses: actions/upload-artifact@v4
+        with:
+          name: keeper-win-exe
+          path: dist/*.exe
+          retention-days: 5

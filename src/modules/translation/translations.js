@@ -45,6 +45,7 @@ export default {
     Btn_Move: {[EN]: "Move", [UK]: "Перемістити"},
     Btn_Back: {[EN]: "Back", [UK]: "Назад"},
     Btn_DeleteAccount: {[EN]: "Delete Account", [UK]: "Видалити Акаунт"},
+    Btn_ValidateKey: {[EN]: "Validate Key", [UK]: "Перевірити"},
 
     // Form general labels;
     Form_Grl_InputPlaceholder: {[EN]: "Type here...", [UK]: "Введіть значення тут..."},
@@ -93,12 +94,20 @@ export default {
         [UK]: "Ви впевнені, що бажаєте експортувати дані?"
     },
     Form_User_ExportDataError: {[EN]: "Couldn't export data!", [UK]: "Неможливо експортувати дані!"},
+    Form_User_ExportWarning: {
+        [EN]: "You're going to export the credentials in decrypted format!",
+        [UK]: "Ваші секретні дані буде експортовано у де-шифрованому вигляді!"
+    },
     Form_User_ImportData: {[EN]: "Import", [UK]: "Імпортувати"},
     Form_User_ImportDataConfirmation: {
         [EN]: "Are you sure you want to import data?",
         [UK]: "Ви впевнені, що бажаєте імпортувати дані?"
     },
     Form_User_ImportDataError: {[EN]: "Couldn't import data!", [UK]: "Неможливо імпортувати дані!"},
+    Form_User_ImportWarning: {
+        [EN]: "Keep in mind that the data file should be decrypted in order to be imported correctly!",
+        [UK]: "Майте на увазі, що імпортований файл повинен бути розшифрованим для успішного імпорту!"
+    },
 
     // Setup tabs;
     Tab_Setup: {[EN]: "Setup Account", [UK]: "Налаштування акаунту"},

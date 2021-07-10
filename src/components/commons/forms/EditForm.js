@@ -19,6 +19,7 @@ const EditForm = props => {
         hasCustomFields = false,
         loading = false,
         fields = [],
+        saveButtonLbl = Label.Btn_Save,
         onSave,
         onCancel
     } = props;
@@ -89,7 +90,7 @@ const EditForm = props => {
             headerActions={
                 <ButtonGroup>
                     <Button
-                        label={Label.Btn_Save}
+                        label={saveButtonLbl}
                         variant="brand"
                         disabled={!changesDetected}
                         onClick={handleSave}
