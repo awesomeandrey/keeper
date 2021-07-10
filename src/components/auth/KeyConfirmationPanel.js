@@ -59,6 +59,7 @@ const KeyConfirmationPanel = () => {
                     icon={<Icon category="utility" name="yubi_key" size="small"/>}
                     loading={loading}
                     fields={inputFields}
+                    saveButtonLbl={Label.Btn_ValidateKey}
                     onSave={handleSave}
                     onCancel={navService.toDefault}
                 />
