@@ -8,6 +8,10 @@
   },
   "homepage": "./",
   "version": "4.0.7",
+  "engines": {
+    "node": "14.17.3",
+    "npm": "6.14.13"
+  },
   "private": true,
   "main": "electron/main.js",
   "build": {
@@ -63,7 +67,7 @@
   "devDependencies": {
     "concurrently": "^5.0.2",
     "electron": "^7.1.7",
-    "electron-builder": "^21.2.0",
+    "electron-builder": "^24.9.1",
     "electron-rebuild": "^1.10.1",
     "wait-on": "^3.3.0"
   },
