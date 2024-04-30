@@ -6,17 +6,29 @@ on:
     - cron: '0 9 1,15 * *'
   workflow_dispatch:
     branches:
-      - main
       - master
-      - develop
   push:
     branches:
-      - main
       - master
-      - develop
+  pull_request:
+    types: [ opened, synchronize, reopened ]
+    branches:
+      - master
 
 jobs:
+  run-jest-tests:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+      - name: 'Install Dependencies'
+        run: npm install
+      - name: 'Run Jest Tests'
+        run: npm run test
   build-for-ubuntu:
+    needs: [ run-jest-tests ]
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
@@ -34,6 +46,7 @@ jobs:
           path: dist/*.deb
           retention-days: 5
   build-for-mac:
+    needs: [ run-jest-tests ]
     runs-on: macos-12
     steps:
       - uses: actions/checkout@v4
@@ -51,6 +64,7 @@ jobs:
           path: dist/*.dmg
           retention-days: 5
   build-for-win:
+    needs: [ run-jest-tests ]
     runs-on: windows-2019
     steps:
       - uses: actions/checkout@v4
