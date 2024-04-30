@@ -46,7 +46,7 @@
   "dependencies": {
     "@salesforce-ux/design-system": "^2.10.2",
     "@salesforce/design-system-react": "^0.10.17",
-    "bcrypt": "5.0.0",
+    "bcrypt": "5.1.1",
     "cryptr": "^6.0.1",
     "electron-is-dev": "^1.1.0",
     "generate-password": "^1.5.0",
@@ -67,7 +67,7 @@
     "concurrently": "^5.0.2",
     "electron": "^7.1.7",
     "electron-builder": "^24.9.1",
-    "electron-rebuild": "^1.10.1",
+    "electron-rebuild": "^3.2.9",
     "wait-on": "^3.3.0"
   },
   "browserslist": [
