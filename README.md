@@ -4,6 +4,8 @@
 
 Desktop application supporting encryption for user-defined credentials 🔐
 
+[![Build App Executable 🔫](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml/badge.svg?branch=master)](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml)
+
 | Welcome Window                                | Credential Form                                |
 |-----------------------------------------------|------------------------------------------------|
 | ![Welcome Window](public/images/keeper_1.png) | ![Credential Form](public/images/keeper_2.png) |
