@@ -16,7 +16,7 @@
   "build": {
     "appId": "edu.keeper",
     "productName": "Keeper",
-    "copyright": "Copyright © 2024 ${author}",
+    "copyright": "Copyright © 2025 ${author}",
     "files": [
       "build/**/*",
       "node_modules/**/*"
