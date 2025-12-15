@@ -31,7 +31,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04, macos-13, windows-2025 ]
+        os: [ ubuntu-22.04, windows-2025 ]
+#        os: [ ubuntu-22.04, macos-14, windows-2025 ] # TODO - resolve for MacOS
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
