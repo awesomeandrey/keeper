@@ -15,6 +15,7 @@ const createWindow = () => {
         minHeight: 700,
         webPreferences: {
             nodeIntegration: true,
+            contextIsolation: false, // Enforce legacy behavior!
             preload: path.join(__dirname, "preload.js")
         }
     });

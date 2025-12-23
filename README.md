@@ -16,7 +16,7 @@ Install `node` version specified in `package.json` file. It's recommended to
 use [NVM](https://tecadmin.net/install-nvm-macos-with-homebrew/) in order to manage NODE versions on local machine:
 
 ```
-export NV=v14.21.3 && nvm install "$NV" && nvm use "$NV"
+export NV=v14 && nvm install "$NV" && nvm use "$NV"
 ```
 
 Invoke the script below in order to generate executable:
@@ -27,7 +27,7 @@ npm install && npm run electron-pack
 
 Note that the executable generation might take 5-10 minutes to complete!
 
-### Build executable automatically
+### Build Executable Automatically
 
 Invoke [Build App Executable](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml) GitHub
 Action Workflow and download artifact with executable file for your OS:
@@ -37,6 +37,8 @@ Action Workflow and download artifact with executable file for your OS:
 | MacOS   | `*.dmg`                   |
 | Ubuntu  | `*.deb`                   |
 | Windows | `*.exe `                  |
+
+To install `.deb` file run this command: `sudo dpkg -i <PATH>/keeper*.deb`
 
 #### Technical stack
 

@@ -1,6 +1,6 @@
 const Cipher = require("./Сipher");
 
-const VALID_ENC_KEY = "TotallySecretKey1", INVALID_ENC_KEY = "hello-world";
+const VALID_ENC_KEY = "TotallySecretKey1", INVALID_ENC_KEY = "invalid key because of space";
 
 const TEST_STR = "This string should be encrypted / Тестова стрічка, що для шифрування!";
 

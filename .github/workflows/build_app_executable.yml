@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '14.x'
       - name: 'Install Dependencies'
-        run: npm install
+        run: npm install --legacy-peer-deps
       - name: 'Run Jest Tests'
         run: npm run test
   build-app:
@@ -32,7 +32,6 @@ jobs:
       fail-fast: false
       matrix:
         os: [ ubuntu-22.04, windows-2025 ]
-#        os: [ ubuntu-22.04, macos-14, windows-2025 ] # TODO - resolve for MacOS
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

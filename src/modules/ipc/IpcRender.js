@@ -7,7 +7,8 @@ const IpcRender = {};
 
 IpcRender.send = ({channelName, data}) => {
     if (ipcRenderer) {
-        ipcRenderer.send(channelName, data);
+        const clonableDataState = JSON.parse(JSON.stringify(data || {}));
+        ipcRenderer.send(channelName, clonableDataState);
     } else {
         console.error(">>> 'ipcRenderer' was not found.")
     }

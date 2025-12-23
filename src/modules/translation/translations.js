@@ -122,8 +122,8 @@ export default {
     Field_User_SaveKey: {[EN]: "Save Encryption Key locally", [UK]: "Зберегти секретний ключ локально"},
     Field_User_EncryptionKey: {[EN]: "Encryption Key", [UK]: "Секретний Ключ"},
     Field_User_EncryptionKey_HelpText: {
-        [EN]: "Key should be 17 symbols size. Only latin letters are allowed.",
-        [UK]: "Секретний Ключ має складатися з букв англійського алфавіту. Довжина ключа має становити 17 символів."
+        [EN]: "Key should be 5+ symbols size. Only latin letters are allowed, no spaces.",
+        [UK]: "Секретний Ключ має складатися з букв англійського алфавіту. Довжина ключа має становити 5+ символів без пробілів."
     },
     Field_User_DefaultCredentialsFolder: {
         [EN]: "Select folder for credentials",
@@ -150,7 +150,7 @@ export default {
         [UK]: "Будь-ласка, підтвердіть секретний ключ!"
     },
     EncryptionKey_Confirmed: {[EN]: "Key was confirmed.", [UK]: "Секретний ключ підтверджено."},
-    EncryptionKey_ToProvide: {[EN]: "Provide encryption key", [UK]: "Введіть секретний ключ"},
+    EncryptionKey_ToProvide: {[EN]: "Provide Encryption Key", [UK]: "Введіть Cекретний Kлюч"},
     EncryptionKey_NotConfirmed: {[EN]: "Encryption key was not confirmed!", [UK]: "Ключ не підтверджено!"},
     EncryptionKey_NotProvided: {[EN]: "New Encryption key was not provided!", [UK]: "Новий ключ не надано."},
     EncryptionKey_CannotBeSame: {

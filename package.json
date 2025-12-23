@@ -7,7 +7,7 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "engines": {
     "node": "14.x"
   },
