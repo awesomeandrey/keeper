@@ -97,6 +97,6 @@ module.exports = {
         CUSTOM: "custom"
     },
     Patterns: {
-        EncryptionKey: "^[a-zA-Z0-9_-]{17}$"
+        EncryptionKey: "^\\S{5,}$"
     }
 };
