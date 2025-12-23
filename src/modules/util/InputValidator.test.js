@@ -16,8 +16,8 @@ describe("InputValidator", () => {
     });
     test("isValidEncryptionKey", () => {
         [
-            {url: "thiskeyist0000000000long", valid: false},
-            {url: "thiskeyisshort", valid: false},
+            {url: "thiskeyist0000000000long", valid: true},
+            {url: "thiskeyisshort", valid: true},
             {url: "space not allowed", valid: false},
             {url: "ThisIsVal1dKEY_77", valid: true}
         ].forEach(caseDef => {

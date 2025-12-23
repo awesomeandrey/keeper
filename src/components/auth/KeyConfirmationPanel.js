@@ -39,7 +39,11 @@ const KeyConfirmationPanel = () => {
                 // Navigate end user to vault;
                 navService.toVault();
             })
-            .catch(errorText => error({title: Label.ToastErrorTitle, message: errorText}))
+            .catch(errorText => {
+                if (userProxy.encryptionKey !== undefined) {
+                    error({title: Label.ToastErrorTitle, message: errorText})
+                }
+            })
             .then(() => setLoading(false));
     }, [userRecord, globalActions, navService]);
 
