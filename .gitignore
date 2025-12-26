@@ -1,6 +1,11 @@
+# Folders
 /.idea/
 /node_modules/
 /public/assets/
 /build/
 /dist/
+/temp/
+
+# Files
+.DS_Store
 yarn.lock

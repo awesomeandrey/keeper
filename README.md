@@ -10,13 +10,13 @@ Desktop application supporting encryption for user-defined credentials 🔐
 |-----------------------------------------------|------------------------------------------------|
 | ![Welcome Window](public/images/keeper_1.png) | ![Credential Form](public/images/keeper_2.png) |
 
-### Build executable manually
+### Build Executable Manually
 
 Install `node` version specified in `package.json` file. It's recommended to
 use [NVM](https://tecadmin.net/install-nvm-macos-with-homebrew/) in order to manage NODE versions on local machine:
 
 ```
-export NV=v14 && nvm install "$NV" && nvm use "$NV"
+export NV=v16 && nvm install "$NV" && nvm use "$NV"
 ```
 
 Invoke the script below in order to generate executable:
@@ -40,11 +40,11 @@ Action Workflow and download artifact with executable file for your OS:
 
 To install `.deb` file run this command: `sudo dpkg -i <PATH>/keeper*.deb`
 
-#### Technical stack
+#### Technical Stack
 
 `electron` `nodejs` `react` `js` `slds` `jest` `yarn` `npm` `bcrypt` `crypt` `react-dnd` `github-actions`
 
-#### Resources used
+#### Resources Used
 
 - [Salesforce Lightning Design System](https://www.lightningdesignsystem.com)
 - [Lightning Design System for React](https://react.lightningdesignsystem.com)
