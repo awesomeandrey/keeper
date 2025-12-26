@@ -7,9 +7,9 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "private": true,
   "main": "electron/main.js",
@@ -44,9 +44,9 @@
     "electron-pack": "yarn electron-builder \"-c.extraMetadata.main=build/electron/main.js\""
   },
   "dependencies": {
-    "@salesforce-ux/design-system": "^2.10.2",
-    "@salesforce/design-system-react": "^0.10.17",
-    "bcrypt": "5.0.0",
+    "@salesforce-ux/design-system": "2.10.2",
+    "@salesforce/design-system-react": "0.10.17",
+    "bcrypt": "^5.1.0",
     "cryptr": "^6.0.1",
     "electron-is-dev": "^1.1.0",
     "generate-password": "^1.5.0",

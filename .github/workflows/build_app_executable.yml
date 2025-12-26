@@ -13,30 +13,39 @@ on:
     branches:
       - master
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   run-jest-tests:
     runs-on: ubuntu-22.04
+    env:
+      CI: true
+      SKIP_PREFLIGHT_CHECK: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: 'Install Dependencies'
-        run: npm install --legacy-peer-deps
+        run: npm install
       - name: 'Run Jest Tests'
         run: npm run test
   build-app:
     needs: [ run-jest-tests ]
     runs-on: ${{ matrix.os }}
+    env:
+      SKIP_PREFLIGHT_CHECK: true
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04, windows-2025 ]
+        os: [ ubuntu-22.04, macos-14, windows-2025 ]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - uses: GuillaumeFalourd/setup-rsync@v1.2
         if: ${{ contains(matrix.os, 'windows') }}
       - run: rsync --version
