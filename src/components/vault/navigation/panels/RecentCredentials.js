@@ -41,7 +41,7 @@ const RecentCredentials = () => {
                 globalActions.setRecentCredentials(
                     recentCredentials.filter(credential => {
                         let credentialProxy = new CredentialProxy(credential);
-                        return credentialProxy !== credentialProxyToDelete.id;
+                        return credentialProxy.id !== credentialProxyToDelete.id;
                     })
                 );
             }

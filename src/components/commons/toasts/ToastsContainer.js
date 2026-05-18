@@ -5,14 +5,13 @@ import Toast from "@salesforce/design-system-react/module/components/toast";
 import CustomEvents from "../../../modules/util/CustomEvents";
 
 import {ApplicationEvents} from "../../../constants";
-import {generate} from "shortid";
 
 const ToastsContainer = () => {
     const [toasts, setToasts] = useState([]);
 
     useEffect(() => {
         const handlerFunc = ({detail: toastDef}) => {
-            toastDef.id = generate();
+            toastDef.id = crypto.randomUUID();
             setToasts(_ => [..._, toastDef]);
         };
         CustomEvents.register({eventName: ApplicationEvents.SHOW_TOAST, callback: handlerFunc});

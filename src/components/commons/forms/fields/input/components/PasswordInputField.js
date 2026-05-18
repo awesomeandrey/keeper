@@ -3,8 +3,6 @@ import Input from "@salesforce/design-system-react/module/components/input";
 import Tooltip from "@salesforce/design-system-react/module/components/tooltip";
 import InputIcon from "@salesforce/design-system-react/module/components/icon/input-icon";
 
-import PasswordGenerator from "generate-password";
-
 import {test} from "../../../../../../modules/util/InputValidator";
 import {Label} from "../../../../../../modules/translation/LabelService";
 
@@ -32,14 +30,9 @@ const PasswordInputField = props => {
     };
 
     const handleRefreshPassword = () => {
-        let generatedPasswords = PasswordGenerator.generateMultiple(3, {
-            length: 17,
-            uppercase: true,
-            lowercase: true,
-            numbers: true,
-            symbols: true
-        });
-        updateInputValue(generatedPasswords[0]);
+        const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}";
+        const bytes = crypto.getRandomValues(new Uint8Array(17));
+        updateInputValue(Array.from(bytes, b => chars[b % chars.length]).join(""));
     };
 
     const inputType = visible ? "text" : "password", iconName = visible ? "hide" : "preview";
