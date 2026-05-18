@@ -1,4 +1,4 @@
-const shortId = require("shortid");
+const {randomUUID} = require("crypto");
 const CommonFields = require("../proxies/common/common-fields");
 
 const {ID, LAST_MODIFIED_DATE} = CommonFields;
@@ -32,7 +32,7 @@ class GenericDAO {
     persist({tableName, record}) {
         let recordId = record[ID];
         if (!recordId) {
-            recordId = record[ID] = shortId.generate();
+            recordId = record[ID] = randomUUID();
         }
         record[LAST_MODIFIED_DATE] = new Date().getTime();
         this.lowDB

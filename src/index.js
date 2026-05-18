@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import ReactDOM from "react-dom";
+import {createRoot} from "react-dom/client";
 import IconSettings from "@salesforce/design-system-react/module/components/icon-settings";
 import BrandBand from "@salesforce/design-system-react/module/components/brand-band";
 import Welcome from "./components/home/Welcome";
@@ -12,7 +12,7 @@ import ToastsContainer from "./components/commons/toasts/ToastsContainer";
 import IpcRenderController from "./controllers/IpcRenderController";
 import IpcRender from "./modules/ipc/IpcRender";
 import CustomEvents from "./modules/util/CustomEvents";
-import useGlobal from "./modules/globalState";
+import useGlobal, {GlobalProvider} from "./modules/globalState";
 
 import {Label} from "./modules/translation/LabelService";
 import {Channels, Links} from "./constants";
@@ -51,6 +51,8 @@ const AppContainer = () => {
     )
 };
 
-ReactDOM.render(
-    <AppContainer/>, document.querySelector("#app")
+createRoot(document.querySelector("#app")).render(
+    <GlobalProvider>
+        <AppContainer/>
+    </GlobalProvider>
 );

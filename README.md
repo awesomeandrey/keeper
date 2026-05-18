@@ -10,14 +10,22 @@ Desktop application supporting encryption for user-defined credentials 🔐
 |-----------------------------------------------|------------------------------------------------|
 | ![Welcome Window](public/images/keeper_1.png) | ![Credential Form](public/images/keeper_2.png) |
 
-### Build Executable Manually
+### Development Mode
 
 Install `node` version specified in `package.json` file. It's recommended to
 use [NVM](https://tecadmin.net/install-nvm-macos-with-homebrew/) in order to manage NODE versions on local machine:
 
 ```
-export NV=v16 && nvm install "$NV" && nvm use "$NV"
+export NV=v20 && nvm install "$NV" && nvm use "$NV"
 ```
+
+Run command below to preview/build/adjust/debug application locally:
+
+```
+npm install && npm run electron-dev
+```
+
+### Build Executable Manually
 
 Invoke the script below in order to generate executable:
 

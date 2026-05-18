@@ -1,26 +1,30 @@
-import React from "react";
-import useGlobalHook from "use-global-hook";
-
-const actions = {
-    setUserInfo: (_, userInfo) => {
-        _.setState({userInfo});
-    },
-    setAppVersion: (_, appVersion) => {
-        _.setState({appVersion});
-    },
-    setRecentCredentials: (_, recentCredentials) => {
-        _.setState({recentCredentials});
-    },
-    dropState: (_) => {
-        _.setState({..._.state, ...initialState});
-    }
-};
+import React, {createContext, useContext, useMemo, useState} from "react";
 
 const initialState = {
     userInfo: null,
     recentCredentials: []
 };
 
-const useGlobal = useGlobalHook(React, initialState, actions);
+const GlobalContext = createContext(null);
 
+const GlobalProvider = ({children}) => {
+    const [state, setState] = useState(initialState);
+
+    const actions = useMemo(() => ({
+        setUserInfo: (userInfo) => setState(s => ({...s, userInfo})),
+        setAppVersion: (appVersion) => setState(s => ({...s, appVersion})),
+        setRecentCredentials: (recentCredentials) => setState(s => ({...s, recentCredentials})),
+        dropState: () => setState({...initialState})
+    }), []);
+
+    return (
+        <GlobalContext.Provider value={[state, actions]}>
+            {children}
+        </GlobalContext.Provider>
+    );
+};
+
+const useGlobal = () => useContext(GlobalContext);
+
+export {GlobalProvider};
 export default useGlobal;
