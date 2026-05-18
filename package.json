@@ -7,9 +7,9 @@
     "url": "https://github.com/awesomeandrey/keeper"
   },
   "homepage": "./",
-  "version": "5.0.2",
+  "version": "6.0.0",
   "engines": {
-    "node": "16.x"
+    "node": ">=18.0.0"
   },
   "private": true,
   "main": "electron/main.js",
@@ -40,35 +40,32 @@
     "test": "react-scripts test",
     "copy-slds-assets": "rsync node_modules/@salesforce-ux/design-system/assets public -r",
     "electron-dev": "NODE_ENV_IS_DEV=1 concurrently \"yarn start\" \"wait-on http://localhost:3000 && electron .\"",
-    "preelectron-pack": "yarn run copy-slds-assets && yarn build && rsync electron build -r && rsync src build -r --exclude components --exclude *.test.js",
-    "electron-pack": "yarn electron-builder \"-c.extraMetadata.main=build/electron/main.js\""
+    "preelectron-pack": "npm run copy-slds-assets && npm run build && rsync electron build -r && rsync src build -r --exclude components --exclude *.test.js",
+    "electron-pack": "npx electron-builder \"-c.extraMetadata.main=build/electron/main.js\""
   },
   "dependencies": {
     "@salesforce-ux/design-system": "2.10.2",
     "@salesforce/design-system-react": "0.10.17",
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^6.0.0",
     "cryptr": "^6.0.1",
     "electron-is-dev": "^1.1.0",
-    "generate-password": "^1.5.0",
     "is-valid-url": "^1.0.1",
     "js-base64": "^2.5.1",
     "lowdb": "^1.0.0",
-    "react": "^16.12.0",
-    "react-dnd": "^10.0.2",
-    "react-dnd-html5-backend": "^10.0.2",
-    "react-dom": "^16.12.0",
+    "react": "^18.3.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.3.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "shortid": "2.2.15",
-    "use-global-hook": "^0.1.12",
+    "react-scripts": "^5.0.1",
     "yarn": "^1.22.10"
   },
   "devDependencies": {
-    "concurrently": "^5.0.2",
-    "electron": "^28.3.2",
-    "electron-builder": "^24.9.1",
-    "electron-rebuild": "^1.10.1",
-    "wait-on": "^3.3.0"
+    "concurrently": "^9.2.1",
+    "electron": "^28.3.3",
+    "electron-builder": "^26.8.1",
+    "wait-on": "^9.0.10",
+    "webpack": "^5.106.2"
   },
   "browserslist": [
     "defaults"

@@ -6,7 +6,6 @@ import Button from "@salesforce/design-system-react/module/components/button";
 import Icon from "@salesforce/design-system-react/module/components/icon";
 import {Spinner} from "@salesforce/design-system-react";
 
-import shortId from "shortid";
 import {FieldTypes} from "../../../constants";
 import {test, isValidUrl} from "../../../modules/util/InputValidator";
 import {Label} from "../../../modules/translation/LabelService";
@@ -60,7 +59,7 @@ const EditForm = props => {
 
     const handleAddCustomField = () => {
         const customFieldShell = {
-            name: shortId.generate(),
+            name: crypto.randomUUID(),
             type: FieldTypes.CUSTOM,
             createdDateNum: new Date().getTime(),
         };

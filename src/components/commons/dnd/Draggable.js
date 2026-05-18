@@ -6,7 +6,8 @@ const Draggable = props => {
     const ref = useRef(null);
 
     const [{isDragging}, drag] = useDrag({
-        item: {type, ...data},
+        type,
+        item: {...data},
         collect: monitor => ({
             isDragging: monitor.isDragging()
         })
