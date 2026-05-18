@@ -17,6 +17,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  id-token: write
+
 jobs:
   run-jest-tests:
     runs-on: ubuntu-22.04
@@ -46,8 +50,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '16.x'
-      - uses: GuillaumeFalourd/setup-rsync@v1.2
+      - name: 'Install rsync (Windows)'
         if: ${{ contains(matrix.os, 'windows') }}
+        run: choco install rsync -y
       - run: rsync --version
       - name: 'Install Dependencies'
         run: npm install
