@@ -61,7 +61,7 @@
     "yarn": "^1.22.10"
   },
   "devDependencies": {
-    "concurrently": "^9.2.1",
+    "concurrently": "^9.2.3",
     "electron": "^28.3.3",
     "electron-builder": "^26.8.1",
     "wait-on": "^9.0.10",
