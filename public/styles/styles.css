@@ -29,6 +29,7 @@
 /* Custom Card styles */
 
 .custom-card {
+    min-height: 0;
 }
 
 .custom-card__header {
