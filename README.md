@@ -4,7 +4,7 @@
 
 Desktop application supporting encryption for user-defined credentials 🔐
 
-[![Build App Executable 🔫](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml/badge.svg?branch=master)](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml)
+[![Build App Executable 🔫](https://github.com/awesomeandrey/keeper/actions/workflows/build-app-executable.yml/badge.svg?branch=master)](https://github.com/awesomeandrey/keeper/actions/workflows/build-app-executable.yml)
 
 | Welcome Window                                | Credential Form                                |
 |-----------------------------------------------|------------------------------------------------|
@@ -37,7 +37,7 @@ Note that the executable generation might take 5-10 minutes to complete!
 
 ### Build Executable Automatically
 
-Invoke [Build App Executable](https://github.com/awesomeandrey/keeper/actions/workflows/build_app_executable.yml) GitHub
+Invoke [Build App Executable](https://github.com/awesomeandrey/keeper/actions/workflows/build-app-executable.yml) GitHub
 Action Workflow and download artifact with executable file for your OS:
 
 | OS      | Executable File Extension |

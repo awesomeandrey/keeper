@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   run-jest-tests:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     env:
       CI: true
     steps:
@@ -41,7 +41,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ ubuntu-22.04, macos-14, windows-2025 ]
+        os: [ ubuntu-24.04, macos-26, windows-2025 ]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
